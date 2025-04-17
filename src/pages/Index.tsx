@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,11 +7,11 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen pt-24">
       {/* Hero Section */}
       <section className="relative h-[600px] bg-gradient-to-r from-blue-50 to-white">
         <div className="container mx-auto px-4 h-full flex items-center">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               A precious commodity. Delivered with care.
             </h1>
@@ -34,17 +33,18 @@ const Index = () => {
       {/* Who We Serve Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">Who We Serve</h2>
+          <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in">Who We Serve</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-6">
+            {/* Add hover animations to cards */}
+            <Card className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <h3 className="text-xl font-semibold mb-4">Supermarkets</h3>
               <p className="text-gray-600">Bulk water supply for retail stores</p>
             </Card>
-            <Card className="p-6">
+            <Card className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <h3 className="text-xl font-semibold mb-4">Residential</h3>
               <p className="text-gray-600">Home delivery services</p>
             </Card>
-            <Card className="p-6">
+            <Card className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg">
               <h3 className="text-xl font-semibold mb-4">Corporate</h3>
               <p className="text-gray-600">Office water solutions</p>
             </Card>
@@ -55,23 +55,24 @@ const Index = () => {
       {/* Why Choose Us Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12">Why Choose KilenAby?</h2>
+          <h2 className="text-3xl font-bold mb-12 animate-fade-in">Why Choose KilenAby?</h2>
           <div className="space-y-6 max-w-2xl">
-            <div className="flex items-center gap-4">
+            {/* Add hover and entrance animations to features */}
+            <div className="flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
               <div className="w-1 h-12 bg-blue-500"></div>
               <div>
                 <h3 className="font-semibold mb-2">Quality Break-Free</h3>
                 <p className="text-gray-600">Premium water delivery service you can trust</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
               <div className="w-1 h-12 bg-blue-500"></div>
               <div>
                 <h3 className="font-semibold mb-2">24/7/365 Service</h3>
                 <p className="text-gray-600">Round-the-clock delivery when you need it</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
               <div className="w-1 h-12 bg-blue-500"></div>
               <div>
                 <h3 className="font-semibold mb-2">96% Success Rate</h3>
@@ -136,21 +137,25 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section with enhanced animations */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12">What Our Customers Are Saying</h2>
+          <h2 className="text-3xl font-bold mb-12 animate-fade-in">What Our Customers Are Saying</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <TestimonialCard
-              text="The best water delivery service I've ever used. Always on time and professional."
-              author="John Smith"
-              rating={5}
-            />
-            <TestimonialCard
-              text="Great service and quality water. Highly recommended for both home and office."
-              author="Jane Doe"
-              rating={5}
-            />
+            <div className="animate-fade-in [animation-delay:200ms]">
+              <TestimonialCard
+                text="The best water delivery service I've ever used. Always on time and professional."
+                author="John Smith"
+                rating={5}
+              />
+            </div>
+            <div className="animate-fade-in [animation-delay:400ms]">
+              <TestimonialCard
+                text="Great service and quality water. Highly recommended for both home and office."
+                author="Jane Doe"
+                rating={5}
+              />
+            </div>
           </div>
         </div>
       </section>
