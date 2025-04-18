@@ -4,12 +4,14 @@ import { Textarea } from "@/components/ui/textarea";
 import TestimonialCard from "@/components/TestimonialCard";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import WhoWeServe from "@/components/whoWeServe";
+import WhyChooseUs from "@/components/whyChooseUS";
 
 const Index = () => {
   return (
     <div className="flex flex-col min-h-screen pt-0">
       {/* Hero Section */}
-      <section className="relative min-h-screen pt-24 pb-16">
+<section className="relative min-h-screen pt-24 md:px-12 pb-16">
   {/* Background Images with responsive switching */}
   <div 
     className="absolute inset-0 hidden md:block bg-cover bg-center z-0" 
@@ -20,22 +22,22 @@ const Index = () => {
     style={{ backgroundImage: "url('/mobileHero.webp')" }}
   />
   
-  {/* Overlay gradient */}
-  <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-transparent z-0"></div>
+  {/* Darker Overlay for better text contrast */}
+  <div className="absolute inset-0 bg-black/40 z-0"></div>
   
-  <div className="container mx-auto px-4 h-full flex items-center relative z-10">
-    <div className="max-w-2xl">
-      <h1 
-        className="text-4xl md:text-6xl font-bold mb-6 text-gray-800 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]"
-      >
-         precious commodity. <br className="hidden md:block" />
-        <span className="text-blue-600">Delivered with care.</span>
-      </h1>
-      
+  <div className="container mx-auto px-4 md:px-10 h-full flex items-center md:items-end relative z-10">
+    <div className="max-w-2xl pt-16 md:pt-0 md:mb-16">
+    <h1 
+  className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]"
+>
+  A Precious<br />
+  Commodity<br />
+  <span className="text-white">Delivered with care.</span>
+</h1>      
       <p 
-        className="text-lg text-gray-600 mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]"
+        className="text-lg text-white/90 mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]"
       >
-        We're here to serve pure, fresh water to your doorstep.
+        We source, filter and deliver the clearest, best tasting drinking water to our customers.
       </p>
       
       <div 
@@ -43,31 +45,28 @@ const Index = () => {
       >
         <Button 
           size="lg" 
-          className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+          className="bg-[#101828] hover:bg-[#1d2939] text-white transition-all duration-300 transform hover:scale-105"
           asChild
         >
-          <Link to="/products">Shop Now</Link>
+          <Link to="/products">Get in Touch</Link>
         </Button>
         
         <Button 
           size="lg" 
           variant="outline" 
-          className="border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105"
+          className="bg-white border-white text-black hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
           asChild
         >
-          <Link to="/contact">Contact Us</Link>
+          <Link to="/contact">Become a Distributor</Link>
         </Button>
       </div>
     </div>
     
-    {/* Water Bottle Image (Hidden on mobile) */}
+    {/* Water Bottle Image (Hidden on mobile, aligned at bottom on desktop) */}
     <div 
-      className="hidden md:block absolute bottom-0 right-8 w-64 lg:w-80 opacity-0 animate-[fadeIn_1s_ease-out_0.8s_forwards,floatAnimation_4s_ease-in-out_infinite]"
-      style={{
-        transformOrigin: 'bottom center',
-      }}
+      className="hidden md:block md:flex-1 md:self-end mb-16 ml-8"
     >
-      <img src="/bottleWater.png" alt="Premium Water Bottle" className="w-full h-auto" />
+      <img src="/bottleWater.png" alt="Premium Water Bottle" className="w-64 lg:w-[450px] h-auto ml-auto transition-all duration-500 hover:translate-y-2" />
     </div>
   </div>
   
@@ -92,70 +91,15 @@ const Index = () => {
         opacity: 1;
       }
     }
-    
-    @keyframes floatAnimation {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-    }
   `}</style>
 </section>
 
       {/* Who We Serve Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center animate-fade-in">Who We Serve</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Add hover animations to cards */}
-            <Card className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">Supermarkets</h3>
-              <p className="text-gray-600">Bulk water supply for retail stores</p>
-            </Card>
-            <Card className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">Residential</h3>
-              <p className="text-gray-600">Home delivery services</p>
-            </Card>
-            <Card className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">Corporate</h3>
-              <p className="text-gray-600">Office water solutions</p>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <WhoWeServe/>
+      
 
       {/* Why Choose Us Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 animate-fade-in">Why Choose KilenAby?</h2>
-          <div className="space-y-6 max-w-2xl">
-            {/* Add hover and entrance animations to features */}
-            <div className="flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
-              <div className="w-1 h-12 bg-blue-500"></div>
-              <div>
-                <h3 className="font-semibold mb-2">Quality Break-Free</h3>
-                <p className="text-gray-600">Premium water delivery service you can trust</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
-              <div className="w-1 h-12 bg-blue-500"></div>
-              <div>
-                <h3 className="font-semibold mb-2">24/7/365 Service</h3>
-                <p className="text-gray-600">Round-the-clock delivery when you need it</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
-              <div className="w-1 h-12 bg-blue-500"></div>
-              <div>
-                <h3 className="font-semibold mb-2">96% Success Rate</h3>
-                <p className="text-gray-600">High satisfaction rate among our customers</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WhyChooseUs/>
 
       {/* Our Products Section */}
       <section className="py-16">
