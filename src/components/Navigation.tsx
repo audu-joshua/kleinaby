@@ -1,11 +1,20 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -16,20 +25,20 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20 my-4 rounded-full backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg px-8 transition-all duration-300 hover:bg-white/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+      <div className="container mx-auto px-4 md:px-8">
+        <div className={`flex justify-between items-center ${scrolled ? 'h-14' : 'h-16'} my-2 rounded-full bg-white shadow-lg px-6 transition-all duration-300 hover:bg-white/15 pointer-events-auto`}>
           <Link to="/" className="flex items-center transition-transform duration-300 hover:scale-105">
-            <img src="/public/lovable-uploads/b9edc7cb-f274-4b2c-9783-17e6cac20340.png" alt="Logo" className="h-10 w-10" />
+            <img src="/logo.png" alt="Logo" className="h-16 w-16" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-gray-700 hover:text-blue-600 transition-all duration-300 hover:scale-105 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-blue-600 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                className="text-gray-700 font-medium hover:text-blue-500 transition-all duration-300 text-sm uppercase tracking-wide relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:-bottom-1 after:left-0 after:bg-blue-500 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
               >
                 {link.name}
               </Link>
@@ -40,23 +49,38 @@ const Navigation = () => {
           <div className="md:hidden">
             <Button
               variant="ghost"
-              size="icon"
+              size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="transition-transform duration-300 hover:scale-105"
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-          <div className="mt-4 rounded-2xl backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg overflow-hidden">
+        {/* Full-screen Mobile Navigation */}
+        <div 
+          className={`fixed inset-0 z-40 backdrop-blur-xl bg-white/30 transition-all duration-500 flex flex-col justify-center items-center md:hidden pointer-events-auto ${
+            isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        >
+          <div className="absolute top-4 right-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(false)}
+              className="transition-transform duration-300 hover:scale-105"
+            >
+              <X className="h-6 w-6" />
+            </Button>
+          </div>
+          
+          <div className="flex flex-col items-center space-y-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="block py-3 px-8 text-gray-700 hover:text-blue-600 hover:bg-white/20 transition-all duration-300"
+                className="text-gray-800 text-2xl font-medium hover:text-blue-500 transition-all duration-300 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:-bottom-2 after:left-0 after:bg-blue-500 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}

@@ -7,28 +7,102 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="flex flex-col min-h-screen pt-24">
+    <div className="flex flex-col min-h-screen pt-0">
       {/* Hero Section */}
-      <section className="relative h-[600px] bg-gradient-to-r from-blue-50 to-white">
-        <div className="container mx-auto px-4 h-full flex items-center">
-          <div className="max-w-2xl animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              A precious commodity. Delivered with care.
-            </h1>
-            <p className="text-lg text-gray-600 mb-8">
-              We're here to serve pure, fresh water to your doorstep.
-            </p>
-            <div className="space-x-4">
-              <Button size="lg" asChild>
-                <Link to="/products">Shop Now</Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/contact">Contact Us</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="relative min-h-screen pt-24 pb-16">
+  {/* Background Images with responsive switching */}
+  <div 
+    className="absolute inset-0 hidden md:block bg-cover bg-center z-0" 
+    style={{ backgroundImage: "url('/desktopHero.webp')" }}
+  />
+  <div 
+    className="absolute inset-0 block md:hidden bg-cover bg-center z-0" 
+    style={{ backgroundImage: "url('/mobileHero.webp')" }}
+  />
+  
+  {/* Overlay gradient */}
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-transparent z-0"></div>
+  
+  <div className="container mx-auto px-4 h-full flex items-center relative z-10">
+    <div className="max-w-2xl">
+      <h1 
+        className="text-4xl md:text-6xl font-bold mb-6 text-gray-800 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]"
+      >
+         precious commodity. <br className="hidden md:block" />
+        <span className="text-blue-600">Delivered with care.</span>
+      </h1>
+      
+      <p 
+        className="text-lg text-gray-600 mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]"
+      >
+        We're here to serve pure, fresh water to your doorstep.
+      </p>
+      
+      <div 
+        className="space-x-4 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]"
+      >
+        <Button 
+          size="lg" 
+          className="bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+          asChild
+        >
+          <Link to="/products">Shop Now</Link>
+        </Button>
+        
+        <Button 
+          size="lg" 
+          variant="outline" 
+          className="border-blue-600 text-blue-600 hover:bg-blue-50 transition-all duration-300 transform hover:scale-105"
+          asChild
+        >
+          <Link to="/contact">Contact Us</Link>
+        </Button>
+      </div>
+    </div>
+    
+    {/* Water Bottle Image (Hidden on mobile) */}
+    <div 
+      className="hidden md:block absolute bottom-0 right-8 w-64 lg:w-80 opacity-0 animate-[fadeIn_1s_ease-out_0.8s_forwards,floatAnimation_4s_ease-in-out_infinite]"
+      style={{
+        transformOrigin: 'bottom center',
+      }}
+    >
+      <img src="/bottleWater.png" alt="Premium Water Bottle" className="w-full h-auto" />
+    </div>
+  </div>
+  
+  {/* Custom animation keyframes */}
+  <style jsx>{`
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes floatAnimation {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+  `}</style>
+</section>
 
       {/* Who We Serve Section */}
       <section className="py-16 bg-white">
