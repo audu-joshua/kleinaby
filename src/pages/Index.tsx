@@ -9,6 +9,11 @@ import WhyChooseUs from "@/components/whyChooseUS";
 import ProductsSection from "@/components/ourProducts";
 import PartnerWithUs from "@/components/distribute";
 import NationWideDelivery from "@/components/delivery";
+import Carousel from "@/components/Carousel";
+import CarouselContent from "@/components/CarouselContent";
+import CarouselItem from "@/components/CarouselItem";
+import CarouselPrevious from "@/components/CarouselPrevious";
+import CarouselNext from "@/components/CarouselNext";
 
 const Index = () => {
   return (
@@ -117,25 +122,95 @@ const Index = () => {
       {/* Nationwide Delivery Section */}
       <NationWideDelivery />
 
-      {/* Testimonials Section with enhanced animations */}
-      <section className="py-16">
+      {/* Testimonials Section */}
+      <section className="py-16 bg-[#BEEBFF]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 animate-fade-in">What Our Customers Are Saying</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <h2 className="text-3xl font-bold mb-12 animate-fade-in text-center">
+            What Our Customers Are Saying
+          </h2>
+          
+          {/* Desktop View */}
+          <div className="hidden md:grid md:grid-cols-2 gap-8">
             <div className="animate-fade-in [animation-delay:200ms]">
               <TestimonialCard
-                text="The best water delivery service I've ever used. Always on time and professional."
+                text="The best water delivery service I've ever used. Always on time and their customer service is exceptional. I've never had any issues with delivery schedules."
                 author="John Smith"
                 rating={5}
+                image="/w1.png"
               />
             </div>
             <div className="animate-fade-in [animation-delay:400ms]">
               <TestimonialCard
-                text="Great service and quality water. Highly recommended for both home and office."
-                author="Jane Doe"
+                text="Great service and quality water. As a business owner, reliable water delivery is crucial. KlienAby has been a game-changer for our office."
+                author="Sarah Johnson"
                 rating={5}
+                image="/w2.png"
               />
             </div>
+            <div className="animate-fade-in [animation-delay:600ms]">
+              <TestimonialCard
+                text="The water quality is exceptional. We've been using their service for our restaurant for over a year now, and the consistency is remarkable."
+                author="Michael Chen"
+                rating={5}
+                image="/w3.png"
+              />
+            </div>
+            <div className="animate-fade-in [animation-delay:800ms]">
+              <TestimonialCard
+                text="Switched to KlienAby from another provider and couldn't be happier. Their eco-friendly approach and reliable service make them stand out."
+                author="Emma Davis"
+                rating={5}
+                image="/w1.png"
+              />
+            </div>
+          </div>
+
+          {/* Mobile View with Carousel */}
+          <div className="md:hidden">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                  <TestimonialCard
+                    text="The best water delivery service I've ever used. Always on time and their customer service is exceptional."
+                    author="John Smith"
+                    rating={5}
+                    image="/w1.png"
+                  />
+                </CarouselItem>
+                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                  <TestimonialCard
+                    text="Great service and quality water. Highly recommended for both home and office."
+                    author="Sarah Johnson"
+                    rating={5}
+                    image="/w2.png"
+                  />
+                </CarouselItem>
+                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                  <TestimonialCard
+                    text="The water quality is exceptional. We've been using their service for our restaurant for over a year now."
+                    author="Michael Chen"
+                    rating={5}
+                    image="/w3.png"
+                  />
+                </CarouselItem>
+                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                  <TestimonialCard
+                    text="Switched to KlienAby from another provider and couldn't be happier. Their eco-friendly approach is amazing."
+                    author="Emma Davis"
+                    rating={5}
+                    image="/w1.png"
+                  />
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         </div>
       </section>
