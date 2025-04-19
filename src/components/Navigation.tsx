@@ -83,7 +83,7 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="flex md:hidden justify-between items-center mx-0 mt-4">
+        <div className="flex md:hidden w-full justify-between items-center mx-0 mt-4">
           <div className={`flex justify-between items-center w-full rounded-full px-4 py-2 shadow-sm transition-all duration-300 ${
             scrolled ? "bg-white" : "bg-white/20 backdrop-blur-lg"
           }`}>
@@ -115,7 +115,7 @@ const Navigation = () => {
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`fixed top-0 right-0 h-full w-3/5 bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out ${
+          className={`fixed top-0 right-0 h-full w-[70%] bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
