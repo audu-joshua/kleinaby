@@ -1,6 +1,12 @@
+
 import React, { useState } from 'react';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem 
+} from "@/components/ui/carousel";
 
 const ProductsSection = () => {
   const [currentProduct, setCurrentProduct] = useState(0);
@@ -122,67 +128,83 @@ const ProductsSection = () => {
           ))}
         </div>
 
-        {/* Mobile View */}
-        <div className="md:hidden overflow-hidden relative px-6">
-          <div 
-            className="flex transition-transform duration-500 ease-out -ml-6"
-            style={{ transform: `translateX(calc(-${currentProduct * 92}% + 24px))` }}
+        {/* Mobile View with Carousel */}
+        <div className="md:hidden overflow-hidden">
+          <Carousel
+            opts={{
+              align: "center",
+              containScroll: "trimSnaps"
+            }}
+            className="w-full"
+            setApi={(api) => {
+              api.on('select', () => {
+                setCurrentProduct(api.selectedScrollSnap());
+              });
+            }}
+            selectedIndex={currentProduct}
           >
-            {products.map((product, index) => (
-              <div key={index} className="w-[92%] flex-shrink-0 pr-6">
-                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                  <div className="p-5">
-                    <div className="relative mb-5 overflow-hidden rounded-xl">
-                      <img 
-                        src={product.image} 
-                        alt={product.title} 
-                        className="w-full h-48 object-contain bg-gray-50"
-                      />
+            <CarouselContent>
+              {products.map((product, index) => (
+                <CarouselItem key={index} className="w-full">
+                  <div className="p-4">
+                    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+                      <div className="p-5">
+                        <div className="relative mb-5 overflow-hidden rounded-xl">
+                          <img 
+                            src={product.image} 
+                            alt={product.title} 
+                            className="w-full h-48 object-contain bg-gray-50"
+                          />
+                        </div>
+                        
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">{product.title}</h3>
+                        <p className="text-gray-600 text-sm mb-5">{product.description}</p>
+                        
+                        <ul className="space-y-3">
+                          {product.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-3">
+                              <div className="w-7 h-7 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                                <Check className="w-3.5 h-3.5 text-white" />
+                              </div>
+                              <div>
+                                <span className="text-gray-900 font-semibold block text-sm">{feature.title}</span>
+                                <span className="text-gray-500 text-xs">{feature.subtitle}</span>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                    
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{product.title}</h3>
-                    <p className="text-gray-600 text-sm mb-5">{product.description}</p>
-                    
-                    <ul className="space-y-3">
-                      {product.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <div className="w-7 h-7 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                            <Check className="w-3.5 h-3.5 text-white" />
-                          </div>
-                          <div>
-                            <span className="text-gray-900 font-semibold block text-sm">{feature.title}</span>
-                            <span className="text-gray-500 text-xs">{feature.subtitle}</span>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                </div>
-              </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+
+          {/* Pagination Dots */}
+          <div className="flex items-center justify-center gap-3 mt-6">
+            {products.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentProduct(index)}
+                className={`
+                  relative transition-all duration-500 ease-out
+                  ${index === currentProduct
+                    ? 'w-10 h-2.5 bg-sky-600 rounded-full hover:bg-sky-700'
+                    : 'w-2.5 h-2.5 bg-gray-300 rounded-full hover:bg-gray-400'
+                  }
+                `}
+                aria-label={`Go to product ${index + 1}`}
+              >
+                {index === currentProduct && (
+                  <span 
+                    className="absolute inset-0 rounded-full bg-sky-400 animate-pulse" 
+                    style={{ opacity: 0.3 }} 
+                  />
+                )}
+              </button>
             ))}
           </div>
-        </div>
-
-        {/* Pagination Dots */}
-        <div className="flex items-center justify-center gap-3 mt-10">
-          {products.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleSlideChange(index)}
-              className={`
-                relative transition-all duration-500 ease-out
-                ${index === currentProduct
-                  ? 'w-10 h-2.5 bg-sky-600 rounded-full hover:bg-sky-700'
-                  : 'w-2.5 h-2.5 bg-gray-300 rounded-full hover:bg-gray-400'
-                }
-              `}
-              aria-label={`Go to slide ${index + 1}`}
-            >
-              {index === currentProduct && (
-                <span className="absolute inset-0 rounded-full bg-sky-400 animate-pulse" style={{ opacity: 0.3 }} />
-              )}
-            </button>
-          ))}
         </div>
       </div>
     </section>

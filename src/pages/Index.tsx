@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,13 +13,38 @@ import NationWideDelivery from "@/components/delivery";
 import { 
   Carousel, 
   CarouselContent, 
-  CarouselItem, 
-  CarouselPrevious, 
-  CarouselNext 
+  CarouselItem,
 } from "@/components/ui/carousel";
 
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const testimonials = [
+    {
+      text: "The best water delivery service I've ever used. Always on time and their customer service is exceptional.",
+      author: "John Smith",
+      rating: 5,
+      image: "/w1.png"
+    },
+    {
+      text: "Great service and quality water. Highly recommended for both home and office.",
+      author: "Sarah Johnson",
+      rating: 5,
+      image: "/w2.png"
+    },
+    {
+      text: "The water quality is exceptional. We've been using their service for our restaurant for over a year now.",
+      author: "Michael Chen",
+      rating: 5,
+      image: "/w3.png"
+    },
+    {
+      text: "Switched to KlienAby from another provider and couldn't be happier. Their eco-friendly approach is amazing.",
+      author: "Emma Davis",
+      rating: 5,
+      image: "/w1.png"
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen pt-0">
@@ -137,46 +161,19 @@ const Index = () => {
           
           {/* Desktop View */}
           <div className="hidden md:grid md:grid-cols-2 gap-8">
-            <div className="animate-fade-in [animation-delay:200ms]">
-              <TestimonialCard
-                text="The best water delivery service I've ever used. Always on time and their customer service is exceptional. I've never had any issues with delivery schedules."
-                author="John Smith"
-                rating={5}
-                image="/w1.png"
-              />
-            </div>
-            <div className="animate-fade-in [animation-delay:400ms]">
-              <TestimonialCard
-                text="Great service and quality water. As a business owner, reliable water delivery is crucial. KlienAby has been a game-changer for our office."
-                author="Sarah Johnson"
-                rating={5}
-                image="/w2.png"
-              />
-            </div>
-            <div className="animate-fade-in [animation-delay:600ms]">
-              <TestimonialCard
-                text="The water quality is exceptional. We've been using their service for our restaurant for over a year now, and the consistency is remarkable."
-                author="Michael Chen"
-                rating={5}
-                image="/w3.png"
-              />
-            </div>
-            <div className="animate-fade-in [animation-delay:800ms]">
-              <TestimonialCard
-                text="Switched to KlienAby from another provider and couldn't be happier. Their eco-friendly approach and reliable service make them stand out."
-                author="Emma Davis"
-                rating={5}
-                image="/w1.png"
-              />
-            </div>
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className={`animate-fade-in [animation-delay:${(index + 1) * 200}ms]`}>
+                <TestimonialCard {...testimonial} />
+              </div>
+            ))}
           </div>
 
           {/* Mobile View with Carousel */}
           <div className="md:hidden relative">
             <Carousel
               opts={{
-                align: "start",
-                loop: true,
+                align: "center",
+                containScroll: "trimSnaps"
               }}
               className="w-full"
               setApi={(api) => {
@@ -184,52 +181,24 @@ const Index = () => {
                   setCurrentTestimonial(api.selectedScrollSnap());
                 });
               }}
+              selectedIndex={currentTestimonial}
             >
               <CarouselContent>
-                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                  <TestimonialCard
-                    text="The best water delivery service I've ever used. Always on time and their customer service is exceptional."
-                    author="John Smith"
-                    rating={5}
-                    image="/w1.png"
-                  />
-                </CarouselItem>
-                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                  <TestimonialCard
-                    text="Great service and quality water. Highly recommended for both home and office."
-                    author="Sarah Johnson"
-                    rating={5}
-                    image="/w2.png"
-                  />
-                </CarouselItem>
-                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                  <TestimonialCard
-                    text="The water quality is exceptional. We've been using their service for our restaurant for over a year now."
-                    author="Michael Chen"
-                    rating={5}
-                    image="/w3.png"
-                  />
-                </CarouselItem>
-                <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                  <TestimonialCard
-                    text="Switched to KlienAby from another provider and couldn't be happier. Their eco-friendly approach is amazing."
-                    author="Emma Davis"
-                    rating={5}
-                    image="/w1.png"
-                  />
-                </CarouselItem>
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="w-full">
+                    <TestimonialCard {...testimonial} />
+                  </CarouselItem>
+                ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
             </Carousel>
 
             {/* Pagination Dots */}
             <div className="flex items-center justify-center gap-3 mt-10">
-              {[0, 1, 2, 3].map((index) => (
+              {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => {
-                    // TODO: Implement slide change logic
+                    setCurrentTestimonial(index);
                   }}
                   className={`
                     relative transition-all duration-500 ease-out
