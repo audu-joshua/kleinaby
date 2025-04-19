@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,11 +10,13 @@ import WhyChooseUs from "@/components/whyChooseUS";
 import ProductsSection from "@/components/ourProducts";
 import PartnerWithUs from "@/components/distribute";
 import NationWideDelivery from "@/components/delivery";
-import Carousel from "@/components/Carousel";
-import CarouselContent from "@/components/CarouselContent";
-import CarouselItem from "@/components/CarouselItem";
-import CarouselPrevious from "@/components/CarouselPrevious";
-import CarouselNext from "@/components/CarouselNext";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselPrevious, 
+  CarouselNext 
+} from "@/components/ui/carousel";
 
 const Index = () => {
   return (
@@ -79,7 +82,7 @@ const Index = () => {
   </div>
   
   {/* Custom animation keyframes */}
-  <style jsx>{`
+  <style dangerouslySetInnerHTML={{ __html: `
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -99,7 +102,7 @@ const Index = () => {
         opacity: 1;
       }
     }
-  `}</style>
+  `}} />
 </section>
 
       {/* Who We Serve Section */}
