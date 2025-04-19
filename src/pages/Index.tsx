@@ -181,7 +181,6 @@ const Index = () => {
                   setCurrentTestimonial(api.selectedScrollSnap());
                 });
               }}
-              selectedIndex={currentTestimonial}
             >
               <CarouselContent>
                 {testimonials.map((testimonial, index) => (
