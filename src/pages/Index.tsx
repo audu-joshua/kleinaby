@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,6 +18,8 @@ import {
 } from "@/components/ui/carousel";
 
 const Index = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   return (
     <div className="flex flex-col min-h-screen pt-0">
       {/* Hero Section */}
@@ -169,13 +170,18 @@ const Index = () => {
           </div>
 
           {/* Mobile View with Carousel */}
-          <div className="md:hidden">
+          <div className="md:hidden relative">
             <Carousel
               opts={{
                 align: "start",
                 loop: true,
               }}
               className="w-full"
+              setApi={(api) => {
+                api.on('select', () => {
+                  setCurrentTestimonial(api.selectedScrollSnap());
+                });
+              }}
             >
               <CarouselContent>
                 <CarouselItem className="md:basis-1/2 lg:basis-1/3">
@@ -214,6 +220,33 @@ const Index = () => {
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
+
+            {/* Pagination Dots */}
+            <div className="flex items-center justify-center gap-3 mt-10">
+              {[0, 1, 2, 3].map((index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    // TODO: Implement slide change logic
+                  }}
+                  className={`
+                    relative transition-all duration-500 ease-out
+                    ${index === currentTestimonial
+                      ? 'w-10 h-2.5 bg-sky-600 rounded-full hover:bg-sky-700'
+                      : 'w-2.5 h-2.5 bg-gray-300 rounded-full hover:bg-gray-400'
+                    }
+                  `}
+                  aria-label={`Go to slide ${index + 1}`}
+                >
+                  {index === currentTestimonial && (
+                    <span 
+                      className="absolute inset-0 rounded-full bg-sky-400 animate-pulse" 
+                      style={{ opacity: 0.3 }} 
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
