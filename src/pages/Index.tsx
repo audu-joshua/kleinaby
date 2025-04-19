@@ -153,7 +153,7 @@ const Index = () => {
       <NationWideDelivery />
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-[#BEEBFF]">
+      <section className="py-16 bg-[#BEEBFF] md:px-12">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 animate-fade-in text-center">
             What Our Customers Are Saying
