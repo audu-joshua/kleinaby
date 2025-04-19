@@ -6,6 +6,9 @@ import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import WhoWeServe from "@/components/whoWeServe";
 import WhyChooseUs from "@/components/whyChooseUS";
+import ProductsSection from "@/components/ourProducts";
+import PartnerWithUs from "@/components/distribute";
+import NationWideDelivery from "@/components/delivery";
 
 const Index = () => {
   return (
@@ -102,58 +105,17 @@ const Index = () => {
       <WhyChooseUs/>
 
       {/* Our Products Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12">Our Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-6">
-              <img src="/placeholder.svg" alt="Water Bottle" className="w-full h-48 object-cover mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Bottled Water</h3>
-              <p className="text-gray-600 mb-4">Pure and refreshing bottled water</p>
-              <Button className="w-full">Buy Now</Button>
-            </Card>
-            <Card className="p-6">
-              <img src="/placeholder.svg" alt="Spring Water" className="w-full h-48 object-cover mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Spring Water</h3>
-              <p className="text-gray-600 mb-4">Natural spring water from selected sources</p>
-              <Button className="w-full">Buy Now</Button>
-            </Card>
-            <Card className="p-6">
-              <img src="/placeholder.svg" alt="Water Dispenser" className="w-full h-48 object-cover mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Water Dispenser</h3>
-              <p className="text-gray-600 mb-4">Modern water dispensers for your convenience</p>
-              <Button className="w-full">Buy Now</Button>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <ProductsSection />
+
+      {/* Call to Action Section */}
+      
 
       {/* Partner With Us Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12">Partner With Us</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <img src="/placeholder.svg" alt="Partner 1" className="w-full h-48 object-cover rounded-lg" />
-            <img src="/placeholder.svg" alt="Partner 2" className="w-full h-48 object-cover rounded-lg" />
-            <img src="/placeholder.svg" alt="Partner 3" className="w-full h-48 object-cover rounded-lg" />
-            <img src="/placeholder.svg" alt="Partner 4" className="w-full h-48 object-cover rounded-lg" />
-          </div>
-        </div>
-      </section>
+      <PartnerWithUs />
+
 
       {/* Nationwide Delivery Section */}
-      <section className="py-16 bg-blue-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-8 md:mb-0">
-              <h2 className="text-3xl font-bold mb-4">We Deliver Nationwide</h2>
-              <p className="mb-6">Experience our premium water delivery service across the country</p>
-              <Button variant="secondary">Track Order</Button>
-            </div>
-            <img src="/placeholder.svg" alt="Delivery Van" className="w-full md:w-1/2 rounded-lg" />
-          </div>
-        </div>
-      </section>
+      <NationWideDelivery />
 
       {/* Testimonials Section with enhanced animations */}
       <section className="py-16">
