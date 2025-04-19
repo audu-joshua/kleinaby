@@ -10,10 +10,10 @@ const NationWideDelivery = () => {
           {/* Text content */}
           <motion.div 
             className="lg:w-1/2 mt-12 lg:mt-0"
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
+            // initial={{ x: -50, opacity: 0 }}
+            // whileInView={{ x: 0, opacity: 1 }}
+            // transition={{ duration: 0.6, ease: 'easeOut' }}
+            // viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold mb-6 text-white">We Deliver Nationwide</h2>
             <p className="text-gray-300 mb-8">
@@ -28,10 +28,10 @@ const NationWideDelivery = () => {
           {/* Tilted Image Card */}
           <motion.div 
             className="lg:w-1/2"
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
+            // initial={{ x: 50, opacity: 0 }}
+            // whileInView={{ x: 0, opacity: 1 }}
+            // transition={{ duration: 0.6, ease: 'easeOut' }}
+            // viewport={{ once: true }}
           >
             <div className="relative h-96 w-full max-w-lg mx-auto">
               {/* Background card with tilt effect */}

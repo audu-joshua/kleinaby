@@ -10,10 +10,10 @@ const PartnerWithUs = () => {
           {/* Text content */}
           <motion.div
             className="lg:w-1/2 mt-12 lg:mt-0"
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
+            // initial={{ x: -50, opacity: 0 }}
+            // whileInView={{ x: 0, opacity: 1 }}
+            // transition={{ duration: 0.6, ease: 'easeOut' }}
+            // viewport={{ once: true }}
           >
             <h2 className="text-3xl font-bold mb-6">Partner With Us</h2>
             <p className="text-[#797979] mb-8">
@@ -29,10 +29,10 @@ const PartnerWithUs = () => {
           {/* Images grid */}
           <motion.div
             className="lg:w-1/2"
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            viewport={{ once: true }}
+            // initial={{ x: 50, opacity: 0 }}
+            // whileInView={{ x: 0, opacity: 1 }}
+            // transition={{ duration: 0.6, ease: 'easeOut' }}
+            // viewport={{ once: true }}
           >
             <div className="grid grid-cols-2 gap-4">
               <img 
