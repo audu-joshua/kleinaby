@@ -48,66 +48,67 @@ const Index = () => {
 
   return (
     <div className="flex flex-col min-h-screen pt-0">
-      {/* Hero Section */}
-<section className="relative min-h-screen pt-24 md:px-12 pb-16">
+     {/* Hero Section */}
+<section className="relative min-h-screen pt-24 pb-0 h-screen overflow-visible">
   {/* Background Images with responsive switching */}
   <div 
-    className="absolute inset-0 hidden md:block bg-cover bg-center z-0" 
+    className="absolute inset-0 hidden md:block bg-cover bg-center z-0"
     style={{ backgroundImage: "url('/desktopHero.webp')" }}
   />
   <div 
-    className="absolute inset-0 block md:hidden bg-cover bg-center z-0" 
+    className="absolute inset-0 block md:hidden bg-cover bg-center z-0"
     style={{ backgroundImage: "url('/mobileHero.webp')" }}
   />
-  
+   
   {/* Darker Overlay for better text contrast */}
   <div className="absolute inset-0 bg-black/40 z-0"></div>
-  
-  <div className="container mx-auto px-4 md:px-10 h-full flex items-center md:items-end relative z-10">
-    <div className="max-w-2xl pt-16 md:pt-0 md:mb-16">
-    <h1 
-  className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]"
->
-  A Precious<br />
-  Commodity<br />
-  <span className="text-white">Delivered with care.</span>
-</h1>      
+   
+  <div className="container mx-auto px-4 md:px-0 h-full flex items-center md:gap-4 md:items-end relative z-10">
+    <div className="max-w-2xl pt-16 md:pt-0 pb-8 md:pb-20 md:pl-12 md:w-[60%]">
+      <h1 
+        className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]"
+      >
+        A Precious<br />
+        Commodity<br />
+        <span className="text-white">Delivered with care.</span>
+      </h1>
+      
       <p 
         className="text-lg text-white/90 mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]"
       >
         We source, filter and deliver the clearest, best tasting drinking water to our customers.
       </p>
-      
+       
       <div 
         className="space-x-4 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]"
       >
         <Button 
           size="lg" 
-          className="bg-[#101828] hover:bg-[#1d2939] text-white transition-all duration-300 transform hover:scale-105"
+          className="bg-[#101828] hover:bg-[#1d2939] text-white transition-all duration-300 transform hover:scale-105" 
           asChild
         >
           <Link to="/products">Get in Touch</Link>
         </Button>
-        
+         
         <Button 
           size="lg" 
           variant="outline" 
-          className="bg-white border-white text-black hover:bg-white/90 transition-all duration-300 transform hover:scale-105"
+          className="bg-white border-white text-black hover:bg-white/90 transition-all duration-300 transform hover:scale-105" 
           asChild
         >
           <Link to="/contact">Become a Distributor</Link>
         </Button>
       </div>
     </div>
-    
-    {/* Water Bottle Image (Hidden on mobile, aligned at bottom on desktop) */}
+     
+    {/* Water Bottle Image (Hidden on mobile, positioned to overflow at bottom on desktop) */}
     <div 
-      className="hidden md:block md:flex-1 md:self-end mb-16 ml-8"
+      className="hidden md:block md:flex-1 md:absolute md:right-12 md:bottom-[-80px] z-20 md:w-[40%]"
     >
-      <img src="/bottleWater.png" alt="Premium Water Bottle" className="w-64 lg:w-[450px] h-auto ml-auto transition-all duration-500 hover:translate-y-2" />
+      <img src="/bottleWater.png" alt="Premium Water Bottle" className="w-96 lg:w-[450px] h-auto ml-auto transition-all duration-500 hover:translate-y-2" />
     </div>
   </div>
-  
+   
   {/* Custom animation keyframes */}
   <style dangerouslySetInnerHTML={{ __html: `
     @keyframes fadeInUp {
@@ -120,7 +121,7 @@ const Index = () => {
         transform: translateY(0);
       }
     }
-    
+     
     @keyframes fadeIn {
       from {
         opacity: 0;
