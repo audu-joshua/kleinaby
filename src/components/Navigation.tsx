@@ -42,7 +42,7 @@ const Navigation = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto">
+      <div className=" mx-5 md:container md:mx-auto">
         {/* Desktop Navigation */}
         <div
           className={`hidden mx-10 md:flex justify-between items-center mt-4 rounded-full h-16 px-6 transition-all duration-300 ${
@@ -157,7 +157,7 @@ const Navigation = () => {
                   className="bg-[#101828] text-white px-6 w-full text-center py-2 rounded-full hover:bg-[#1d2939] transition-colors block"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Place Other
+                  Place Order
                 </Link>
               </div>
             </div>
