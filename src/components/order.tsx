@@ -1,8 +1,37 @@
+
 import { useState, useEffect } from 'react';
 import { ChevronDown, AlertCircle, CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-export default function PlaceOrderForm() {
-  const [formData, setFormData] = useState({
+// Define TypeScript interfaces for better type checking
+interface FormData {
+  name: string;
+  phone: string;
+  email: string;
+  products: string[];
+  quantities: string[];
+  deliveryDate: string;
+  comments: string;
+}
+
+interface FormStatus {
+  submitted: boolean;
+  success: boolean;
+  message: string;
+  visible: boolean;
+  progress: number;
+}
+
+interface FormErrors {
+  name?: string;
+  phone?: string;
+  email?: string;
+  products?: string;
+  [key: string]: string | undefined;
+}
+
+const PlaceOrderForm = () => {
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
     email: '',
@@ -12,7 +41,7 @@ export default function PlaceOrderForm() {
     comments: ''
   });
 
-  const [formStatus, setFormStatus] = useState({
+  const [formStatus, setFormStatus] = useState<FormStatus>({
     submitted: false,
     success: false,
     message: '',
@@ -20,12 +49,12 @@ export default function PlaceOrderForm() {
     progress: 100
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   
   // Handle the notification progress and visibility
   useEffect(() => {
-    let timer;
-    let progressTimer;
+    let timer: ReturnType<typeof setTimeout>;
+    let progressTimer: ReturnType<typeof setInterval>;
     
     if (formStatus.submitted) {
       // Show the notification
@@ -55,7 +84,7 @@ export default function PlaceOrderForm() {
     };
   }, [formStatus.submitted]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -66,12 +95,12 @@ export default function PlaceOrderForm() {
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: null
+        [name]: undefined
       }));
     }
   };
 
-  const handleProductChange = (index, value) => {
+  const handleProductChange = (index: number, value: string) => {
     const newProducts = [...formData.products];
     newProducts[index] = value;
     setFormData(prev => ({
@@ -82,11 +111,11 @@ export default function PlaceOrderForm() {
     // Clear product-related errors
     setErrors(prev => ({
       ...prev,
-      products: null
+      products: undefined
     }));
   };
 
-  const handleQuantityChange = (index, value) => {
+  const handleQuantityChange = (index: number, value: string) => {
     // Ensure quantity is at least 0
     const sanitizedValue = value === '' ? '0' : value;
     
@@ -99,7 +128,7 @@ export default function PlaceOrderForm() {
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
     
     // Required fields validation
     if (!formData.name.trim()) newErrors.name = "Name is required";
@@ -147,20 +176,55 @@ export default function PlaceOrderForm() {
     }
   };
 
+  // Animation variants for fade-in effect
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+
   return (
-    <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg">
+    <motion.div 
+      className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={containerVariants}
+    >
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-8">
+        <motion.div className="text-center mb-8" variants={itemVariants}>
           <h2 className="text-3xl font-bold text-gray-900">Please complete the form</h2>
           <p className="mt-2 text-lg text-gray-600">
             Please complete the order form for any of our products. We will deliver as soon as possible.
           </p>
-        </div>
+        </motion.div>
 
         {/* Fixed positioned notification at bottom right */}
         {formStatus.visible && (
           <div className="fixed bottom-6 right-6 z-50 max-w-sm">
-            <div className={`rounded-md shadow-lg overflow-hidden ${formStatus.success ? 'bg-[#101828]' : 'bg-[#101828]'}`}>
+            <motion.div 
+              className={`rounded-md shadow-lg overflow-hidden ${formStatus.success ? 'bg-[#101828]' : 'bg-[#101828]'}`}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+            >
               <div className="relative">
                 {/* Progress bar */}
                 <div 
@@ -181,12 +245,12 @@ export default function PlaceOrderForm() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         )}
 
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+        <motion.div className="space-y-6" variants={containerVariants}>
+          <motion.div variants={itemVariants} className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-[#6F7482]">
                 Your Name*
@@ -218,9 +282,9 @@ export default function PlaceOrderForm() {
               />
               {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={itemVariants}>
             <label htmlFor="email" className="block text-sm font-medium text-[#6F7482]">
               Your Email*
             </label>
@@ -234,10 +298,10 @@ export default function PlaceOrderForm() {
               className={`mt-1 block w-full border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-[#B8BCCA]`}
             />
             {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
-          </div>
+          </motion.div>
 
           {/* Product Selection and Quantity */}
-          <div className="space-y-2">
+          <motion.div variants={itemVariants} className="space-y-2">
             <div className={errors.products ? "pb-1 border-red-500" : ""}>
               {[0, 1, 2, 3, 4].map((index) => (
                 <div key={index} className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2 mb-2">
@@ -282,9 +346,9 @@ export default function PlaceOrderForm() {
               ))}
               {errors.products && <p className="mt-1 text-sm text-red-500">{errors.products}</p>}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={itemVariants}>
             <label htmlFor="deliveryDate" className="block text-sm font-medium text-[#6F7482]">
               Requested delivery date
             </label>
@@ -296,9 +360,9 @@ export default function PlaceOrderForm() {
               onChange={handleInputChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-700 placeholder-[#B8BCCA]"
             />
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div variants={itemVariants}>
             <label htmlFor="comments" className="block text-sm font-medium text-[#6F7482]">
               Comments
             </label>
@@ -311,18 +375,22 @@ export default function PlaceOrderForm() {
               placeholder="Drop additional note"
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 placeholder-[#B8BCCA]"
             />
-          </div>
+          </motion.div>
 
-          <div className="pt-4">
-            <button
+          <motion.div variants={itemVariants} className="pt-4">
+            <motion.button
               onClick={handleSubmit}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               className="w-full flex justify-center py-3 px-4 border border-transparent shadow-sm text-white bg-gray-900 hover:bg-gray-800 focus:outline-none rounded-full transition-colors"
             >
               Place Order Now
-            </button>
-          </div>
-        </div>
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
-}
+};
+
+export default PlaceOrderForm;
