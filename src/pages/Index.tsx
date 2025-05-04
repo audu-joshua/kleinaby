@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,11 +16,53 @@ import {
   CarouselContent, 
   CarouselItem,
 } from "@/components/ui/carousel";
+import { motion, useInView, useAnimation } from "framer-motion";
 
 import ContactForm from "@/components/contactForm";
 
+// Reusable animation component
+const AnimatedSection = ({ children, className, delay = 0 }) => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  
+  useEffect(() => {
+    if (isInView) {
+      controls.start('visible');
+    }
+  }, [controls, isInView]);
+
+  const variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut",
+        delay: delay,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  return (
+    <motion.section
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={variants}
+      className={className}
+    >
+      {children}
+    </motion.section>
+  );
+};
+
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const heroRef = useRef(null);
+  const heroInView = useInView(heroRef, { once: true });
 
   const testimonials = [
     {
@@ -48,126 +91,177 @@ const Index = () => {
     }
   ];
 
+  const heroTextVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.2,
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    })
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.6 + (i * 0.2),
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    })
+  };
+
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen pt-0">
      {/* Hero Section */}
-<section className="relative min-h-screen pt-24 pb-0 h-screen overflow-visible">
-  {/* Background Images with responsive switching */}
-  <div 
-    className="absolute inset-0 hidden md:block bg-cover bg-center z-0"
-    style={{ backgroundImage: "url('/desktopHero.webp')" }}
-  />
-  <div 
-    className="absolute inset-0 block md:hidden bg-cover bg-center z-0"
-    style={{ backgroundImage: "url('/mobileHero.webp')" }}
-  />
-   
-  {/* Darker Overlay for better text contrast */}
-  <div className="absolute inset-0 bg-black/40 z-0"></div>
-   
-  <div className="container mx-auto px-4 md:px-0 h-full flex items-center md:gap-4 md:items-end relative z-10">
-    <div className="max-w-2xl pt-16 md:pt-0 pb-8 md:pb-20 md:pl-12 md:w-[60%]">
-      <h1 
-        className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight opacity-0 animate-[fadeInUp_0.8s_ease-out_0.2s_forwards]"
-      >
-        A Precious<br />
-        Commodity<br />
-        <span className="text-white">Delivered with care.</span>
-      </h1>
-      
-      <p 
-        className="text-lg text-white/90 mb-8 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.4s_forwards]"
-      >
-        We source, filter and deliver the clearest, best tasting drinking water to our customers.
-      </p>
-       
-      <div 
-        className="space-x-4 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]"
-      >
-        <Button 
-          size="lg" 
-          className="bg-[#101828] hover:bg-[#1d2939] text-white transition-all duration-300 transform hover:scale-105" 
-          asChild
-        >
-          <Link to="/products">Get in Touch</Link>
-        </Button>
+      <section ref={heroRef} className="relative min-h-screen pt-24 pb-0 h-screen overflow-visible">
+        {/* Background Images with responsive switching */}
+        <div 
+          className="absolute inset-0 hidden md:block bg-cover bg-center z-0"
+          style={{ backgroundImage: "url('/desktopHero.webp')" }}
+        />
+        <div 
+          className="absolute inset-0 block md:hidden bg-cover bg-center z-0"
+          style={{ backgroundImage: "url('/mobileHero.webp')" }}
+        />
          
-        <Button 
-          size="lg" 
-          variant="outline" 
-          className="bg-white border-white text-black hover:bg-white/90 transition-all duration-300 transform hover:scale-105" 
-          asChild
-        >
-          <Link to="/contact">Become a Distributor</Link>
-        </Button>
-      </div>
-    </div>
-     
-    {/* Water Bottle Image (Hidden on mobile, positioned to overflow at bottom on desktop) */}
-    <div 
-      className="hidden md:block md:flex-1 md:absolute md:right-12 md:bottom-[-80px] z-20 md:w-[40%]"
-    >
-      <img src="/bottleWater.png" alt="Premium Water Bottle" className="w-96 lg:w-[450px] h-auto ml-auto transition-all duration-500 hover:translate-y-2" />
-    </div>
-  </div>
-   
-  {/* Custom animation keyframes */}
-  <style dangerouslySetInnerHTML={{ __html: `
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-     
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-  `}} />
-</section>
+        {/* Darker Overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/40 z-0"></div>
+         
+        <div className="container mx-auto px-4 md:px-0 h-full flex items-center md:gap-4 md:items-end relative z-10">
+          <div className="max-w-2xl pt-16 md:pt-0 pb-8 md:pb-20 md:pl-12 md:w-[60%]">
+            <motion.h1 
+              custom={0}
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={heroTextVariants}
+              className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight"
+            >
+              A Precious<br />
+              Commodity<br />
+              <span className="text-white">Delivered with care.</span>
+            </motion.h1>
+            
+            <motion.p 
+              custom={1}
+              initial="hidden"
+              animate={heroInView ? "visible" : "hidden"}
+              variants={heroTextVariants}
+              className="text-lg text-white/90 mb-8"
+            >
+              We source, filter and deliver the clearest, best tasting drinking water to our customers.
+            </motion.p>
+             
+            <div className="space-x-4">
+              <motion.div
+                custom={0}
+                initial="hidden"
+                animate={heroInView ? "visible" : "hidden"}
+                variants={buttonVariants}
+                className="inline-block"
+              >
+                <Button 
+                  size="lg" 
+                  className="bg-[#101828] hover:bg-[#1d2939] text-white transition-all duration-300 transform hover:scale-105" 
+                  asChild
+                >
+                  <Link to="/products">Get in Touch</Link>
+                </Button>
+              </motion.div>
+               
+              <motion.div
+                custom={1}
+                initial="hidden"
+                animate={heroInView ? "visible" : "hidden"}
+                variants={buttonVariants}
+                className="inline-block"
+              >
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="bg-white border-white text-black hover:bg-white/90 transition-all duration-300 transform hover:scale-105" 
+                  asChild
+                >
+                  <Link to="/contact">Become a Distributor</Link>
+                </Button>
+              </motion.div>
+            </div>
+          </div>
+           
+          {/* Water Bottle Image (Hidden on mobile, positioned to overflow at bottom on desktop) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
+            className="hidden md:block md:flex-1 md:absolute md:right-12 md:bottom-[-80px] z-20 md:w-[40%]"
+          >
+            <img src="/bottleWater.png" alt="Premium Water Bottle" className="w-96 lg:w-[450px] h-auto ml-auto transition-all duration-500 hover:translate-y-2" />
+          </motion.div>
+        </div>
+      </section>
 
       {/* Who We Serve Section */}
-      <WhoWeServe/>
-      
+      <AnimatedSection className="py-16">
+        <WhoWeServe/>
+      </AnimatedSection>
 
       {/* Why Choose Us Section */}
-      <WhyChooseUs/>
+      <AnimatedSection className="py-16" delay={0.1}>
+        <WhyChooseUs/>
+      </AnimatedSection>
 
       {/* Our Products Section */}
       <ProductsSection />
 
-      {/* Call to Action Section */}
-      
-
       {/* Partner With Us Section */}
-      <PartnerWithUs />
-
+      <AnimatedSection className="py-16" delay={0.1}>
+        <PartnerWithUs />
+      </AnimatedSection>
 
       {/* Nationwide Delivery Section */}
-      <NationWideDelivery />
+      <AnimatedSection className="py-16" delay={0.2}>
+        <NationWideDelivery />
+      </AnimatedSection>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-[#BEEBFF] md:px-12">
+      <AnimatedSection className="py-16 bg-[#BEEBFF] md:px-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 animate-fade-in text-center">
+          <motion.h2 
+            variants={fadeInUpVariants}
+            className="text-3xl font-bold mb-12 text-center"
+          >
             What Our Customers Are Saying
-          </h2>
+          </motion.h2>
           
           {/* Desktop View */}
           <div className="hidden md:grid md:grid-cols-2 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className={`animate-fade-in [animation-delay:${(index + 1) * 200}ms]`}>
+              <motion.div 
+                key={index} 
+                variants={fadeInUpVariants}
+                custom={index}
+                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+              >
                 <TestimonialCard {...testimonial} />
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -188,7 +282,9 @@ const Index = () => {
               <CarouselContent>
                 {testimonials.map((testimonial, index) => (
                   <CarouselItem key={index} className="w-full">
-                    <TestimonialCard {...testimonial} />
+                    <motion.div variants={fadeInUpVariants}>
+                      <TestimonialCard {...testimonial} />
+                    </motion.div>
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -201,6 +297,11 @@ const Index = () => {
                   key={index}
                   onClick={() => {
                     setCurrentTestimonial(index);
+                    document.querySelectorAll('.embla__slide')[index].scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'nearest',
+                      inline: 'center'
+                    });
                   }}
                   className={`
                     relative transition-all duration-500 ease-out
@@ -222,24 +323,37 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
 
       {/* Contact Form Section */}
-      <section className="py-16 bg-gray-50">
+      <AnimatedSection className="py-16 bg-gray-50" delay={0.2}>
         <ContactForm/>
-      </section>
+      </AnimatedSection>
 
       {/* Newsletter Section */}
-      <section className="py-16">
+      <AnimatedSection className="py-16" delay={0.3}>
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Never miss our updates</h2>
-          <p className="text-gray-600 mb-8">Subscribe to our newsletter for the latest news and offers</p>
-          <div className="max-w-md mx-auto flex gap-4">
+          <motion.h2 
+            variants={fadeInUpVariants} 
+            className="text-3xl font-bold mb-4"
+          >
+            Never miss our updates
+          </motion.h2>
+          <motion.p 
+            variants={fadeInUpVariants} 
+            className="text-gray-600 mb-8"
+          >
+            Subscribe to our newsletter for the latest news and offers
+          </motion.p>
+          <motion.div 
+            variants={fadeInUpVariants}
+            className="max-w-md mx-auto flex gap-4"
+          >
             <Input type="email" placeholder="Enter your email" />
             <Button>Subscribe</Button>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </AnimatedSection>
     </div>
   );
 };

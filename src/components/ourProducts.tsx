@@ -7,6 +7,7 @@ import {
   CarouselContent, 
   CarouselItem 
 } from "@/components/ui/carousel";
+import { motion, useInView } from 'framer-motion';
 
 const ProductsSection = () => {
   const [currentProduct, setCurrentProduct] = useState(0);
@@ -57,23 +58,53 @@ const ProductsSection = () => {
     setCurrentProduct(index);
   };
 
+  const sectionRef = React.useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        duration: 0.5
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" }
+    }
+  };
+
   return (
-    <section className="py-16 bg-gradient-to-b bg-sky-50 md:px-12">
+    <motion.section 
+      ref={sectionRef}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={containerVariants}
+      className="py-16 bg-gradient-to-b bg-sky-50 md:px-12"
+    >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <motion.div variants={itemVariants} className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900 tracking-tight">Our Products</h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-sm md:text-base">
             We specialize in the production and bulk supply of sachet water and bottled table water, 
             ensuring unbeatable purity and value for shopping malls, supermarkets, event planners, 
             wholesalers, and more
           </p>
-        </div>
+        </motion.div>
 
         {/* Desktop View */}
         <div className="hidden md:flex gap-8 max-w-7xl mx-auto">
           {products.map((product, index) => (
-            <div 
+            <motion.div 
               key={index}
+              variants={itemVariants}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
               className={`
@@ -124,7 +155,7 @@ const ProductsSection = () => {
                   </ul>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -141,12 +172,14 @@ const ProductsSection = () => {
                 setCurrentProduct(api.selectedScrollSnap());
               });
             }}
-            selectedIndex={currentProduct}
           >
             <CarouselContent>
               {products.map((product, index) => (
                 <CarouselItem key={index} className="w-full">
-                  <div className="p-4">
+                  <motion.div 
+                    variants={itemVariants}
+                    className="p-4"
+                  >
                     <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                       <div className="p-5">
                         <div className="relative mb-5 overflow-hidden rounded-xl">
@@ -175,7 +208,7 @@ const ProductsSection = () => {
                         </ul>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -207,7 +240,7 @@ const ProductsSection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
