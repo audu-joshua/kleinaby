@@ -1,8 +1,36 @@
+
 import { useState, useEffect } from 'react';
 import { ChevronDown, AlertCircle, CheckCircle } from 'lucide-react';
 
+// Define TypeScript interfaces for better type checking
+interface FormData {
+  name: string;
+  phone: string;
+  email: string;
+  products: string[];
+  quantities: string[];
+  deliveryDate: string;
+  comments: string;
+}
+
+interface FormStatus {
+  submitted: boolean;
+  success: boolean;
+  message: string;
+  visible: boolean;
+  progress: number;
+}
+
+interface FormErrors {
+  name?: string;
+  phone?: string;
+  email?: string;
+  products?: string;
+  [key: string]: string | undefined;
+}
+
 export default function PlaceOrderForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
     email: '',
@@ -12,7 +40,7 @@ export default function PlaceOrderForm() {
     comments: ''
   });
 
-  const [formStatus, setFormStatus] = useState({
+  const [formStatus, setFormStatus] = useState<FormStatus>({
     submitted: false,
     success: false,
     message: '',
@@ -20,12 +48,12 @@ export default function PlaceOrderForm() {
     progress: 100
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   
   // Handle the notification progress and visibility
   useEffect(() => {
-    let timer;
-    let progressTimer;
+    let timer: NodeJS.Timeout | undefined;
+    let progressTimer: NodeJS.Timeout | undefined;
     
     if (formStatus.submitted) {
       // Show the notification
@@ -50,12 +78,12 @@ export default function PlaceOrderForm() {
     }
     
     return () => {
-      clearTimeout(timer);
-      clearInterval(progressTimer);
+      if (timer) clearTimeout(timer);
+      if (progressTimer) clearInterval(progressTimer);
     };
   }, [formStatus.submitted]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -66,12 +94,12 @@ export default function PlaceOrderForm() {
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [name]: null
+        [name]: undefined
       }));
     }
   };
 
-  const handleProductChange = (index, value) => {
+  const handleProductChange = (index: number, value: string) => {
     const newProducts = [...formData.products];
     newProducts[index] = value;
     setFormData(prev => ({
@@ -82,11 +110,11 @@ export default function PlaceOrderForm() {
     // Clear product-related errors
     setErrors(prev => ({
       ...prev,
-      products: null
+      products: undefined
     }));
   };
 
-  const handleQuantityChange = (index, value) => {
+  const handleQuantityChange = (index: number, value: string) => {
     // Ensure quantity is at least 0
     const sanitizedValue = value === '' ? '0' : value;
     
@@ -98,8 +126,8 @@ export default function PlaceOrderForm() {
     }));
   };
 
-  const validateForm = () => {
-    const newErrors = {};
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
     
     // Required fields validation
     if (!formData.name.trim()) newErrors.name = "Name is required";
