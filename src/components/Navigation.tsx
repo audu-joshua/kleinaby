@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -36,6 +37,7 @@ const Navigation = () => {
     { name: "Products", path: "/products" },
     { name: "Services", path: "/services" },
     { name: "Contact", path: "/contact" },
+    { name: "Order", path: "/order" },
   ];
 
   const isActivePath = (path) => location.pathname === path;
@@ -75,10 +77,10 @@ const Navigation = () => {
 
           {/* Place Other Button */}
           <Link
-            to="/place-other"
+            to="/order"
             className="bg-[#101828] text-white px-6 py-2 rounded-full hover:bg-[#1d2939] transition-colors"
           >
-            Place Other
+            Place Order
           </Link>
         </div>
 
@@ -153,7 +155,7 @@ const Navigation = () => {
               
               <div className="w-full pt-0">
                 <Link
-                  to="/place-other"
+                  to="/order"
                   className="bg-[#101828] text-white px-6 w-full text-center py-2 rounded-full hover:bg-[#1d2939] transition-colors block"
                   onClick={() => setIsMenuOpen(false)}
                 >

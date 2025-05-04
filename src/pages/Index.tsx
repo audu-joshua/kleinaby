@@ -16,6 +16,8 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
+import ContactForm from "@/components/contactForm";
+
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
@@ -224,28 +226,7 @@ const Index = () => {
 
       {/* Contact Form Section */}
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12">Get in Touch</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Card className="p-6">
-              <form className="space-y-6">
-                <div>
-                  <Input type="text" placeholder="Your Name" />
-                </div>
-                <div>
-                  <Input type="email" placeholder="Your Email" />
-                </div>
-                <div>
-                  <Textarea placeholder="Your Message" />
-                </div>
-                <Button type="submit" className="w-full">Send Message</Button>
-              </form>
-            </Card>
-            <div>
-              <img src="/placeholder.svg" alt="Contact" className="w-full h-full object-cover rounded-lg" />
-            </div>
-          </div>
-        </div>
+        <ContactForm/>
       </section>
 
       {/* Newsletter Section */}
