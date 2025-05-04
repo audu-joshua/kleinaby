@@ -148,7 +148,7 @@ export default function PlaceOrderForm() {
   };
 
   return (
-    <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg">
+    <div className="bg-gray-50 py-16 px-4 md:px-12 lg:px-20 rounded-lg shadow-lg">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Please complete the form</h2>
