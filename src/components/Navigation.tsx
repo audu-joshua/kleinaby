@@ -37,7 +37,6 @@ const Navigation = () => {
     { name: "Products", path: "/products" },
     { name: "Services", path: "/services" },
     { name: "Contact", path: "/contact" },
-    { name: "Order", path: "/order" },
   ];
 
   const isActivePath = (path) => location.pathname === path;

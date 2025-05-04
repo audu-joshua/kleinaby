@@ -183,7 +183,7 @@ const Index = () => {
                   className="bg-[#101828] hover:bg-[#1d2939] text-white transition-all duration-300 transform hover:scale-105" 
                   asChild
                 >
-                  <Link to="/products">Get in Touch</Link>
+                  <Link to="/contact">Get in Touch</Link>
                 </Button>
               </motion.div>
                

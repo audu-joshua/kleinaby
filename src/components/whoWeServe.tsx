@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const WhoWeServe = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -106,11 +107,11 @@ const WhoWeServe = () => {
           
           {/* Place Order Now button beneath the cards */}
           <div className="flex justify-center mt-8">
-            <button 
+            <Link to="/order"
               className="px-8 py-3 rounded-full bg-[#101828] text-white font-medium transition-colors hover:bg-[#1d2939]"
             >
               Place Order Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>
