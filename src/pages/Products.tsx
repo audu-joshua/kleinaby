@@ -7,21 +7,21 @@ import { motion } from "framer-motion";
 const Products = () => {
   const products = [
     {
-      name: "Water Dispenser",
-      description: "Premium quality water dispenser for home and office use",
-      price: "$49.99",
+      name: "Refill Jars",
+      description: "The refill bottle product is simply glamorous. It serves high profile clientele business environs such as Homes, Shipping Services, Consultancy outfits and Banking halls. The water pH and plastic quality make the refill process very safe and cost-effective.",
+      //price: "$49.99",
       image: "/D1.png"
     },
     {
       name: "Sachet Water",
-      description: "Pure, refreshing sachet water in convenient packaging",
-      price: "$0.99",
+      description: "The quality of expertise invested in our sachet water purification cycle alongside its affordability makes it irresistible to our target audience, which comprises of medium to large shopping malls, marts at fuel stations and drive-in restaurants",
+      //price: "$0.99",
       image: "/w1.png"
     },
     {
       name: "Table Water",
-      description: "Natural spring water in our signature bottle",
-      price: "$2.99",
+      description: "The plastic bottled water poses a more friendly and exclusive market advantage through its unique mix of presentation and quality fill-in. Our team goes the extra-mile to provide a variety of content being the 0.50, 0.75 and 1.50 litres packaging.",
+      //price: "$2.99",
       image: "/bottleWater.png"
     }
   ];
@@ -79,7 +79,7 @@ const Products = () => {
               <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-2xl font-bold mb-2">{product.name}</h3>
                 <p className="text-gray-600 mb-4 flex-grow">{product.description}</p>
-                <p className="text-xl font-bold text-[#101828] mb-4">{product.price}</p>
+                {/*<p className="text-xl font-bold text-[#101828] mb-4">{product.price}</p> */}
                 
                 <Link to="/order" className="mt-auto">
                   <Button className="w-full bg-[#101828] hover:bg-[#1d2939] text-white transition-colors">
