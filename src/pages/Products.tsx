@@ -43,15 +43,15 @@ const Products = () => {
 
   return (
     <div className="container mx-auto py-12 px-4 md:px-6 lg:py-24">
-      {/* Hero Section */}
+      {/* Hero Section - Updated with dark theme */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-16"
+        className="text-center mb-16 bg-[#101828] py-16 px-6 rounded-xl shadow-lg"
       >
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Products</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Our Products</h1>
+        <p className="text-gray-300 max-w-2xl mx-auto">
           Discover our range of premium water products designed to keep you hydrated with the purest water possible
         </p>
       </motion.div>
