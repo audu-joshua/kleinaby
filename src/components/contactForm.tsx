@@ -88,7 +88,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full bg-white shadow-lg rounded-xl overflow-hidden py-16 px-4 md:px-12 lg:px-20 relative">
+    <div id="contact-form" className="w-full bg-white shadow-lg rounded-xl overflow-hidden py-16 px-4 md:px-12 lg:px-20 relative">
       {notification.show && (
         <div className="fixed bottom-4 right-4 p-4 rounded-lg shadow-lg max-w-xs z-50 bg-[#101828] text-white">
           <div className="flex items-center mb-2">

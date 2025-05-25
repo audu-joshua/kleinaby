@@ -1,4 +1,10 @@
+import { useNavigate } from 'react-router-dom'; // Add this import
+
+
 const WhyChooseKilenAby = () => {
+
+      const navigate = useNavigate();
+
     const reasons = [
       {
         number: "1",
@@ -21,6 +27,10 @@ const WhyChooseKilenAby = () => {
         description: "Compliant with national safety and health standards"
       }
     ];
+
+    const navigateToOrder = () => {
+    navigate('/order');
+  };
   
     return (
       <section className="py-16 bg-[#F8F8F8] md:px-12">
@@ -62,7 +72,7 @@ const WhyChooseKilenAby = () => {
               {/* Image card */}
               <div className="absolute inset-0 bg-white rounded-lg shadow-lg overflow-hidden transform -rotate-1">
                 <img 
-                  src="/C1.webp" 
+                  src="/whyChooseUs.webp" 
                   alt="Water delivery service" 
                   className="w-full h-full object-cover "
                 />
@@ -95,7 +105,7 @@ const WhyChooseKilenAby = () => {
               
               {/* Place Order Button */}
               <div className="mt-12 flex items-center justify-center">
-                <button className="px-8 py-3 rounded-full bg-[#101828] text-white font-medium transition-colors hover:bg-[#1d2939]">
+                <button onClick={navigateToOrder} className="px-8 py-3 rounded-full bg-[#101828] text-white font-medium transition-colors hover:bg-[#1d2939]">
                   Place Order Now
                 </button>
               </div>
@@ -108,7 +118,7 @@ const WhyChooseKilenAby = () => {
               {/* Image card */}
               <div className="absolute inset-0 bg-white rounded-lg shadow-lg overflow-hidden transform -rotate-1">
                 <img 
-                  src="/C1.webp" 
+                  src="/whyChooseUs.webp" 
                   alt="Water delivery service" 
                   className="w-full h-full "
                 />

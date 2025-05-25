@@ -1,12 +1,30 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Add this import
+
 
 export function PlaceOrderHero() {
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
   
   useEffect(() => {
     setIsVisible(true);
   }, []);
   
+  const scrollToForm = () => {
+    const formElement = document.getElementById('order-form'); // Replace 'contact-form' with your actual form component ID
+    if (formElement) {
+      formElement.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start' // You can also use 'center' or 'end'
+      });
+    }
+  };
+
+  // Function to navigate to order page
+  const navigateToProducts = () => {
+    navigate('/products');
+  };
+
   return (
     <div className="w-full h-screen flex items-center md:justify-end justify-center overflow-hidden relative">
       {/* Background Image Container */}
@@ -51,7 +69,7 @@ export function PlaceOrderHero() {
         
         {/* Buttons with standard positioning */}
         <div className="w-full mt-8 sm:mt-12 flex justify-center items-stretch sm:items-center gap-6 sm:gap-6">
-          <button
+          <button onClick={scrollToForm}
             className={`px-6 w-[40%] text-sm md:w-[25%] py-4 sm:py-3 rounded-lg bg-gray-900 text-white md:text-lg sm:text-base font-medium transition-all duration-300 hover:scale-105 sm:w-auto ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
@@ -60,7 +78,7 @@ export function PlaceOrderHero() {
             Order Now
           </button>
           
-          <button
+          <button onClick={navigateToProducts}
             className={`px-6 text-sm w-[60%] md:w-[25%] py-4 sm:py-3 rounded-lg bg-white text-gray-900 md:text-lg sm:text-base font-medium transition-all duration-300 hover:scale-105 sm:w-auto ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}

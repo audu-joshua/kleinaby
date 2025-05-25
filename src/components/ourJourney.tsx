@@ -24,7 +24,7 @@ export default function OurJourney() {
             }`}
           >
             <img
-              src="/journeyMobile.webp"
+              src="/groupImage.webp"
               alt="KlienAby Journey Mobile"
               className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             />
@@ -37,7 +37,7 @@ export default function OurJourney() {
             }`}
           >
             <img
-              src="/JourneyDesktop.webp"
+              src="/groupImage.webp"
               alt="KlienAby Journey Desktop"
               className="w-full h-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             />

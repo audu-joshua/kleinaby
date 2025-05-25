@@ -6,6 +6,10 @@ export default function ServicesHero() {
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+   const ContactButton = () => {
+    window.location.href = '/contact';
+  };
   
   return (
     <div className="relative w-full h-screen flex items-center md:justify-end justify-center overflow-hidden">
@@ -49,7 +53,7 @@ export default function ServicesHero() {
         
         {/* Buttons with standard positioning */}
         <div className="mt-8 sm:mt-12 flex justify-center items-stretch sm:items-center gap-6 sm:gap-6 w-full sm:w-auto">
-          <button
+          <button onClick={ContactButton}
             className={`px-6 w-[40%] text-sm md:w-[25%] py-4 sm:py-3 rounded-lg bg-gray-900 text-white md:text-lg sm:text-base font-medium transition-all duration-300 hover:scale-105 sm:w-auto ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
@@ -58,7 +62,7 @@ export default function ServicesHero() {
             Request an Order
           </button>
           
-          <button
+          <button onClick={ContactButton}
             className={`px-6 text-sm w-[60%] md:w-[25%] py-4 sm:py-3 rounded-lg bg-white text-gray-900 md:text-lg sm:text-base font-medium transition-all duration-300 hover:scale-105 sm:w-auto ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}

@@ -1,13 +1,17 @@
 import React from 'react';
 
 export default function CoreServices() {
+
+  const handleOrderClick = () => {
+    window.location.href = '/order';
+  };
   // Sample service data - replace with your actual content
   const services = [
     {
       id: 1,
       title: "Bulk Water Supply & Distribution",
       description: "KlienAby specializes in large-scale water production and delivery tailored to suit supermarkets, warehouses, hospitals, corporate offices, and logistics hubs.",
-      image: "/j1.webp"
+      image: "/coreValueFirstImage.webp"
     },
     {
       id: 2,
@@ -60,7 +64,7 @@ export default function CoreServices() {
                   <h3 className="text-2xl text-[#000000] font-bold mb-3">{service.title}</h3>
                   <p className="mb-6 text-[#797979]">{service.description}</p>
                 </div>
-                <button className="bg-[#101828] hover:scale-95 text-white font-medium py-2 px-6 rounded-full transition-colors duration-300 w-full md:w-auto md:self-start">
+                <button onClick={handleOrderClick} className="bg-[#101828] hover:scale-95 text-white font-medium py-2 px-6 rounded-full transition-colors duration-300 w-full md:w-auto md:self-start">
                   Place Order
                 </button>
               </div>

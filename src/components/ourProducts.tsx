@@ -31,7 +31,7 @@ const ProductsSection = () => {
           subtitle: "Bulk packaging available for wholesale distribution"
         }
       ],
-      image: "/b1.png"
+      image: "/bottleWater.webp"
     },
     {
       title: "Sachet Water",
@@ -50,7 +50,7 @@ const ProductsSection = () => {
           subtitle: "Hygienic packaging ensures water safety"
         }
       ],
-      image: "/placeholder.svg"
+      image: "/satchetWater.webp"
     }
   ];
 

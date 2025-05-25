@@ -330,7 +330,7 @@ const Index = () => {
         <ContactForm/>
       </AnimatedSection>
 
-      {/* Newsletter Section */}
+      {/* Newsletter Section 
       <AnimatedSection className="py-16" delay={0.3}>
         <div className="container mx-auto px-4 text-center">
           <motion.h2 
@@ -354,6 +354,7 @@ const Index = () => {
           </motion.div>
         </div>
       </AnimatedSection>
+      */}
     </div>
   );
 };

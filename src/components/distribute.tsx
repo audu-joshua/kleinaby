@@ -2,10 +2,14 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // Add this import
+
 
 const PartnerWithUs = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+  const navigate = useNavigate();
+  
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -53,6 +57,11 @@ const PartnerWithUs = () => {
     }
   };
 
+  const navigateToContact = () => {
+    navigate('/contact');
+  };
+
+
   return (
     <section className="py-16 bg-gray-50 md:px-12">
       <motion.div
@@ -77,6 +86,7 @@ const PartnerWithUs = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={navigateToContact}
               className="bg-[#101828] w-full md:w-fit text-white px-6 py-3 rounded-full hover:bg-[#101828]/90 transition-colors"
             >
               Apply to Distribute

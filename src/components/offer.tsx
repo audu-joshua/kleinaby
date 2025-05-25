@@ -20,7 +20,7 @@ export default function WhatWeOffer() {
     },
     {
       id: 3,
-      image: '/j3.webp',
+      image: '/CustomBranding.webp',
       title: 'Custom Branding Services',
       description: 'Personalized bottled water for events, hospitality, an d business branding.'
     },

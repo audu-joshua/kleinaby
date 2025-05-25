@@ -22,7 +22,7 @@ const Products = () => {
       name: "Table Water",
       description: "The plastic bottled water poses a more friendly and exclusive market advantage through its unique mix of presentation and quality fill-in. Our team goes the extra-mile to provide a variety of content being the 0.50, 0.75 and 1.50 litres packaging.",
       //price: "$2.99",
-      image: "/bottleWater.png"
+      image: "/bottleWater.webp"
     }
   ];
   

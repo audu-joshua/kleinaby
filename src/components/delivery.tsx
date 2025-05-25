@@ -2,10 +2,14 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // Add this import
+
 
 const NationWideDelivery = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+  const navigate = useNavigate();
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -48,6 +52,10 @@ const NationWideDelivery = () => {
     }
   };
 
+  const navigateToOrder = () => {
+    navigate('/order');
+  };
+
   return (
     <section className="py-16 bg-[#101828] md:px-12">
       <motion.div 
@@ -70,6 +78,7 @@ const NationWideDelivery = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={navigateToOrder}
               className="bg-[#F7D128] font-semibold w-full md:w-fit text-black px-6 py-3 rounded-full hover:bg-[#e6c11c] transition-colors"
             >
               Place an Order Now!

@@ -60,7 +60,7 @@ export default function OurFacility() {
             style={{ transitionDelay: isVisible ? '100ms' : '0ms' }}
           >
             <img 
-              src="/journeyMobile.webp" 
+              src="/f1.webp" 
               alt="Our Facility" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
@@ -73,7 +73,7 @@ export default function OurFacility() {
             style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
           >
             <img 
-              src="/f1.webp" 
+              src="/f2.png" 
               alt="Bottling Plant" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
@@ -86,7 +86,7 @@ export default function OurFacility() {
             style={{ transitionDelay: isVisible ? '300ms' : '0ms' }}
           >
             <img 
-              src="/f2.webp" 
+              src="/f3.jpg" 
               alt="Processing Area" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
@@ -100,7 +100,7 @@ export default function OurFacility() {
             style={{ transitionDelay: isVisible ? '400ms' : '0ms' }}
           >
             <img 
-              src="/f2.webp" 
+              src="/f4.webp" 
               alt="Quality Control" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
@@ -113,7 +113,7 @@ export default function OurFacility() {
             style={{ transitionDelay: isVisible ? '500ms' : '0ms' }}
           >
             <img 
-              src="/f4.webp" 
+              src="/f5.webp" 
               alt="Storage Area" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
@@ -126,7 +126,7 @@ export default function OurFacility() {
             style={{ transitionDelay: isVisible ? '600ms' : '0ms' }}
           >
             <img 
-              src="/f5.webp" 
+              src="/whyChooseUs.webp" 
               alt="Distribution Center" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
