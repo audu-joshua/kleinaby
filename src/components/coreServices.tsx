@@ -23,7 +23,7 @@ export default function CoreServices() {
       id: 3,
       title: "Retail & Entrepreneur Partnership Program",
       description: "KlienAby supports aspiring entrepreneurs with wholesale pricing, business guidance, and marketing assets. Whether you're a small kiosk or building a regional network, we're here to help.",
-      image: "/j1.webp"
+      image: "/c3.webp"
     },
     {
       id: 4,

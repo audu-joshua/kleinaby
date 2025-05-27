@@ -7,8 +7,7 @@ export default function ContactForm() {
     city: '',
     postcode: '',
     phone: '',
-    email: '',
-    signNda: false
+    email: ''
   });
   
   const [notification, setNotification] = useState({
@@ -39,19 +38,6 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Check if NDA checkbox has been ticked
-    if (!formData.signNda) {
-      setNotification({
-        show: true,
-        success: false,
-        message: 'Please agree to the NDA before submitting.',
-        progress: 100
-      });
-      
-      startProgressCountdown();
-      return;
-    }
     
     // Always throw an error since no mail service is attached yet
     setNotification({
@@ -212,20 +198,6 @@ export default function ContactForm() {
               </div>
             </div>
             
-            {/* NDA Checkbox */}
-            <div className="mt-4">
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="signNda"
-                  checked={formData.signNda}
-                  onChange={handleChange}
-                  className="w-5 h-5 rounded border-gray-500 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="ml-2 text-[#000000] text-sm">I want to protect my data by signing an NDA</span>
-              </label>
-            </div>
-            
             {/* Submit Button */}
             <div className="mt-8 w-full">
               <button
@@ -261,7 +233,7 @@ export default function ContactForm() {
               </div>
               <div className="ml-3">
                 <p className="text-[#000000] font-medium">Email</p>
-                <p className="text-[#1182E2]">orders@klienaby.com</p>
+                <p className="text-[#1182E2]">info@klienaby.com</p>
               </div>
             </div>
           </div>

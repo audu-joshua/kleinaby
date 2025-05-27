@@ -8,13 +8,13 @@ export default function WhatWeOffer() {
   const cards = [
     {
       id: 1,
-      image: '/j1.webp',
+      image: '/bottleWater.webp',
       title: 'Premium Bottled Water Production',
       description: 'Hygienically sourced and purified using advanced filtration technology.'
     },
     {
       id: 2,
-      image: '/j2.webp',
+      image: '/coreValueFirstImage.webp',
       title: 'Bulk Supply & Distribution',
       description: 'Logistics infrastructure for timely delivery to supermarkets, hospitals, hotels, warehouses, and offices. '
     },

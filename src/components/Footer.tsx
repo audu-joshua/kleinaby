@@ -54,15 +54,15 @@ const Footer = () => {
               <ul className="space-y-4">
                 <li className="flex items-center">
                   <Mail className="h-5 w-5 mr-2 flex-shrink-0" />
-                  <span>info@kilenaby.com</span>
+                  <span>orders@klienaby.com</span>
                 </li>
                 <li className="flex items-center">
                   <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
-                  <span>(123) 456-7890</span>
+                  <span>08146417296 , 08182878619</span>
                 </li>
                 <li className="flex items-start">
                   <MapPin className="h-5 w-5 mr-2 flex-shrink-0 mt-1" />
-                  <span>123 Water Street, City, State 12345</span>
+                  <span>17/19 Old Olowora Road, Isheri – Lagos State</span>
                 </li>
               </ul>
             </div>

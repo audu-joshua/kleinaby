@@ -25,6 +25,12 @@ const WhyChooseKilenAby = () => {
         number: "4",
         title: "NAFDAC Certified",
         description: "Compliant with national safety and health standards"
+      },
+      {
+        number: "5",
+        title: "SON Certified",
+        description: "Officially Recognized, Inherently Trusted",
+        image: "/Son.png"
       }
     ];
 
@@ -50,9 +56,22 @@ const WhyChooseKilenAby = () => {
                         <div className="w-[2px] h-8 bg-[#1182E2] mt-2"></div>
                       )}
                     </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{reason.title}</h3>
-                      <p className="text-[#797979]">{reason.description}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3">
+                        {reason.image && (
+                          <div className="w-12 h-12 flex-shrink-0">
+                            <img 
+                              src={reason.image} 
+                              alt={`${reason.title} certification`}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}<div>
+                          <h3 className="font-semibold mb-1">{reason.title}</h3>
+                          <p className="text-[#797979]">{reason.description}</p>
+                        </div>
+                        
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -95,9 +114,23 @@ const WhyChooseKilenAby = () => {
                         <div className="w-[2px] h-8 bg-[#1182E2] mt-2"></div>
                       )}
                     </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{reason.title}</h3>
-                      <p className="text-[#797979]">{reason.description}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3">
+                        {reason.image && (
+                          <div className="w-12 h-12 flex-shrink-0">
+                            <img 
+                              src={reason.image} 
+                              alt={`${reason.title} certification`}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <div>
+                          <h3 className="font-semibold mb-1">{reason.title}</h3>
+                          <p className="text-[#797979]">{reason.description}</p>
+                        </div>
+                        
+                      </div>
                     </div>
                   </div>
                 ))}

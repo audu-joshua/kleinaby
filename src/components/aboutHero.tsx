@@ -16,7 +16,7 @@ export default function AboutUsHero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/aboutBg.webp" 
+          src="/whyChooseUs.webp" 
           alt="Water Bottling Plant" 
           className="w-full h-full object-cover"
         />
