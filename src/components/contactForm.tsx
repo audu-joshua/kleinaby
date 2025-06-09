@@ -220,7 +220,7 @@ export default function ContactForm() {
               </div>
               <div className="ml-3">
                 <p className="text-[#000000] font-medium">Phone</p>
-                <p className="text-[#1182E2]">+234 800 123 4567</p>
+                <p className="text-[#1182E2]">+234 8135045861</p>
               </div>
             </div>
             

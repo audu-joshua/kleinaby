@@ -7,29 +7,33 @@ const WhoWeServe = () => {
   
   const slides = [
     {
-      image: "/w1.png",
-      title: "Residential Customers",
-      description: "We provide best water quality across Nigeria, delivering pure hydration directly to your doorstep."
+            image: "/wh1.png",
+      title: "Supermarkets",
+      description: "Stock your shelves with our premium bottled water in a variety of sizes."
     },
     {
-      image: "/w2.png",
-      title: "Commercial Businesses",
-      description: "We provide best water quality across Nigeria, supporting businesses with reliable water solutions."
+
+            image: "/hospitality.png",
+      title: "Hospitals & Healthcare Facilities",
+      description: "Ensure hydration for patients and staff with safe, clean, and certified water."
     },
     {
-      image: "/w3.png",
-      title: "Hospitality Industry",
-      description: "We provide best water quality across Nigeria, ensuring premium water service for hotels and restaurants."
+       image: "/hotel.png",
+      title: "Hotels, Restaurants & Cafés",
+      description: "Premium bottled water for your premium guests — let us brand it for you."
     },
     {
-      image: "/wh1.png",
-      title: "Educational Institutions",
-      description: "We provide best water quality across Nigeria, keeping schools and universities hydrated with clean water."
-    },
-    {
+
       image: "/wh5.png",
-      title: "Healthcare Facilities",
-      description: "We provide best water quality across Nigeria, supporting medical facilities with pure, safe water solutions."
+      title: "Corporate Offices & Workspaces",
+      description: "Keep your team refreshed and productive with convenient delivery plans."
+ 
+    },
+    {
+      image: "/retail.png",
+      title: "Retail Entrepreneurs & Distributors",
+      description: "Start your bottled water business — we’ll supply you with everything you need."
+      
     }
   ];
 

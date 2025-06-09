@@ -71,9 +71,9 @@ const NationWideDelivery = () => {
             variants={itemVariants}
             className="lg:w-1/2 mt-12 lg:mt-0"
           >
-            <h2 className="text-3xl font-bold mb-6 text-white">We Deliver Nationwide</h2>
+            <h2 className="text-3xl font-bold mb-6 text-white">We Make The Best Delivery</h2>
             <p className="text-gray-300 mb-8">
-            From our plant to your doorstep. Fast delivery to major markets, hospitals, hotels, and warehouse districts.
+            Contact us to get the best delivery option on your order.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -107,7 +107,7 @@ const NationWideDelivery = () => {
                 transition={{ duration: 0.4, delay: 0.3 }}
               >
                 <img 
-                  src="/C1.webp" 
+                  src="/Displace.png" 
                   alt="Water delivery service" 
                   className="w-full h-full object-cover"
                 />

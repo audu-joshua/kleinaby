@@ -10,7 +10,7 @@ const Products = () => {
       name: "Refill Jars",
       description: "The refill bottle product is simply glamorous. It serves high profile clientele business environs such as Homes, Shipping Services, Consultancy outfits and Banking halls. The water pH and plastic quality make the refill process very safe and cost-effective.",
       //price: "$49.99",
-      image: "/D1.png"
+      image: "/jar2.png"
     },
     {
       name: "Sachet Water",

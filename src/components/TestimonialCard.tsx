@@ -1,17 +1,17 @@
 
 import { Card } from "@/components/ui/card";
 import { Star } from "lucide-react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+//import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 
 interface TestimonialCardProps {
   text: string;
   author: string;
   rating: number;
-  image: string;
+  //image: string;
 }
 
-const TestimonialCard = ({ text, author, rating, image }: TestimonialCardProps) => {
+const TestimonialCard = ({ text, author, rating }: TestimonialCardProps) => {
   return (
     <Card className="p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg h-full">
       <div className="flex mb-4 space-x-1">
@@ -25,10 +25,12 @@ const TestimonialCard = ({ text, author, rating, image }: TestimonialCardProps) 
       <p className="text-gray-600 mb-6">{text}</p>
       <Separator className="mb-4" />
       <div className="flex items-center space-x-3">
+        {/* 
         <Avatar>
           <AvatarImage src={image} alt={author} />
           <AvatarFallback>{author[0]}</AvatarFallback>
         </Avatar>
+        */}
         <p className="font-semibold">{author}</p>
       </div>
     </Card>

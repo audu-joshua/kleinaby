@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import TestimonialCard from "@/components/TestimonialCard";
-import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import WhoWeServe from "@/components/whoWeServe";
 import WhyChooseUs from "@/components/whyChooseUS";
@@ -60,34 +58,37 @@ const AnimatedSection = ({ children, className, delay = 0 }) => {
 };
 
 const Index = () => {
+  // All state declarations should be here in the main component
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [carouselApi, setCarouselApi] = useState(null);
+  
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
 
   const testimonials = [
     {
-      text: "The best water delivery service I've ever used. Always on time and their customer service is exceptional.",
-      author: "John Smith",
+      text: "KlienAby is one of best water in Nigeria, the taste is superb, and it is very clean and decent. I always recommend it to my customers over other waters.",
+      author: "Alhaja Basirat ",
       rating: 5,
-      image: "/w1.png"
+      //image: "/w1.png"
     },
     {
-      text: "Great service and quality water. Highly recommended for both home and office.",
-      author: "Sarah Johnson",
+      text: "I have patronized for years and confirm it is very clean water and has no offensive taste.",
+      author: "Charity canteen at federal high court, Ikoyi",
       rating: 5,
-      image: "/w2.png"
+      //image: "/w2.png"
     },
     {
-      text: "The water quality is exceptional. We've been using their service for our restaurant for over a year now.",
-      author: "Michael Chen",
+      text: "The bottled water provided is of high quality, with a clean taste and no unpleasant aftertaste. This is crucial in a hospital setting, where hydration is vital for patient recovery. ",
+      author: "HTS",
       rating: 5,
-      image: "/w3.png"
+      //image: "/w3.png"
     },
     {
-      text: "Switched to KlienAby from another provider and couldn't be happier. Their eco-friendly approach is amazing.",
-      author: "Emma Davis",
+      text: "Your service and quality of your products are top notch considering your constant and regular sanitation of the environment and equipment use in production of your water. Please keep up the good, quality and affordable products offered to the customers. Thank you. ",
+      author: "Mr Coco",
       rating: 5,
-      image: "/w1.png"
+      //image: "/w1.png"
     }
   ];
 
@@ -274,9 +275,12 @@ const Index = () => {
               }}
               className="w-full"
               setApi={(api) => {
-                api.on('select', () => {
-                  setCurrentTestimonial(api.selectedScrollSnap());
-                });
+                setCarouselApi(api);
+                if (api) {
+                  api.on('select', () => {
+                    setCurrentTestimonial(api.selectedScrollSnap());
+                  });
+                }
               }}
             >
               <CarouselContent>
@@ -296,12 +300,10 @@ const Index = () => {
                 <button
                   key={index}
                   onClick={() => {
-                    setCurrentTestimonial(index);
-                    document.querySelectorAll('.embla__slide')[index].scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'nearest',
-                      inline: 'center'
-                    });
+                    if (carouselApi) {
+                      carouselApi.scrollTo(index);
+                      setCurrentTestimonial(index);
+                    }
                   }}
                   className={`
                     relative transition-all duration-500 ease-out
@@ -329,32 +331,6 @@ const Index = () => {
       <AnimatedSection className="py-16 bg-gray-50" delay={0.2}>
         <ContactForm/>
       </AnimatedSection>
-
-      {/* Newsletter Section 
-      <AnimatedSection className="py-16" delay={0.3}>
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2 
-            variants={fadeInUpVariants} 
-            className="text-3xl font-bold mb-4"
-          >
-            Never miss our updates
-          </motion.h2>
-          <motion.p 
-            variants={fadeInUpVariants} 
-            className="text-gray-600 mb-8"
-          >
-            Subscribe to our newsletter for the latest news and offers
-          </motion.p>
-          <motion.div 
-            variants={fadeInUpVariants}
-            className="max-w-md mx-auto flex gap-4"
-          >
-            <Input type="email" placeholder="Enter your email" />
-            <Button>Subscribe</Button>
-          </motion.div>
-        </div>
-      </AnimatedSection>
-      */}
     </div>
   );
 };

@@ -1,16 +1,13 @@
-
 'use client';
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useNavigate } from 'react-router-dom'; // Add this import
-
+import { useNavigate } from 'react-router-dom';
 
 const PartnerWithUs = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const navigate = useNavigate();
   
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -34,17 +31,6 @@ const PartnerWithUs = () => {
     }
   };
 
-  const imageGridVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
-  };
-
   const imageVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -52,7 +38,8 @@ const PartnerWithUs = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
+        ease: "easeOut",
+        delay: 0.3
       }
     }
   };
@@ -61,9 +48,8 @@ const PartnerWithUs = () => {
     navigate('/contact');
   };
 
-
   return (
-    <section className="py-16 bg-gray-50 md:px-12">
+    <section className="py-2 md:py-4 bg-gray-50 md:px-12">
       <motion.div
         ref={containerRef}
         variants={containerVariants}
@@ -93,41 +79,16 @@ const PartnerWithUs = () => {
             </motion.button>
           </motion.div>
 
-          {/* Images grid */}
+          {/* Single image */}
           <motion.div
-            variants={imageGridVariants}
+            variants={imageVariants}
             className="lg:w-1/2"
           >
-            <div className="grid grid-cols-2 gap-4">
-              <motion.div variants={imageVariants}>
-                <img 
-                  src="/D2.png" 
-                  alt="Partner 1" 
-                  className="w-full h-48 object-cover rounded-lg" 
-                />
-              </motion.div>
-              <motion.div variants={imageVariants}>
-                <img 
-                  src="/D3.png" 
-                  alt="Partner 2" 
-                  className="w-full h-48 object-cover rounded-lg" 
-                />
-              </motion.div>
-              <motion.div variants={imageVariants}>
-                <img 
-                  src="/D4.png" 
-                  alt="Partner 3" 
-                  className="w-full h-48 object-cover rounded-lg" 
-                />
-              </motion.div>
-              <motion.div variants={imageVariants}>
-                <img 
-                  src="/D1.png" 
-                  alt="Partner 4" 
-                  className="w-full h-48 object-cover rounded-lg" 
-                />
-              </motion.div>
-            </div>
+            <img
+              src="/partner.png"
+              alt="Partner with us"
+              className="w-full h-80 object-cover rounded-lg"
+            />
           </motion.div>
         </div>
       </motion.div>

@@ -157,76 +157,40 @@ export default function ImprovedOrderForm() {
   };
 
   const handleSubmit = async () => {
-    if (validateForm()) {
-      try {
-        // Prepare order data for email
-        const orderData = {
-          customerName: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          address: formData.address,
-          products: formData.products
-            .map((product, index) => ({
-              product: productList.find(p => p.value === product)?.label || product,
-              quantity: formData.quantities[index]
-            }))
-            .filter(item => item.product && parseInt(item.quantity) > 0),
-          deliveryDate: formData.deliveryDate,
-          comments: formData.comments,
-          orderDate: new Date().toLocaleString()
-        };
+  if (validateForm()) {
+    setFormStatus({
+      submitted: true,
+      success: true,
+      message: "✅ Your message has been received; We will reply shortly.",
+      visible: true,
+      progress: 100
+    });
 
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+    setTimeout(() => {
+      const form = document.getElementById("hiddenForm") as HTMLFormElement;
+      if (form) form.submit();
+    }, 500);
+  } else {
+    setFormStatus({
+      submitted: true,
+      success: false,
+      message: "⚠️ Please fix the errors before submitting.",
+      visible: true,
+      progress: 100
+    });
+  }
+};
 
-        setFormStatus({
-          submitted: true,
-          success: true,
-          message: "🎉 Order received! We'll reach out to you soon.",
-          visible: true,
-          progress: 100
-        });
 
-        // Reset form after successful submission
-        setTimeout(() => {
-          setFormData({
-            name: '',
-            phone: '',
-            email: '',
-            address: '',
-            products: ['', '', '', '', ''],
-            quantities: ['0', '0', '0', '0', '0'],
-            deliveryDate: '',
-            comments: ''
-          });
-        }, 2000);
 
-      } catch (error) {
-        setFormStatus({
-          submitted: true,
-          success: false,
-          message: "❌ Failed to send order. Please try again.",
-          visible: true,
-          progress: 100
-        });
-      }
-    } else {
-      setFormStatus({
-        submitted: true,
-        success: false,
-        message: "⚠️ Please correct the errors in the form.",
-        visible: true,
-        progress: 100
-      });
-    }
-  };
+
 
   const getTotalItems = () => {
     return formData.quantities.reduce((total, qty) => total + parseInt(qty || '0'), 0);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-8 px-4">
+    <div id='order-form' className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         
         {/* Header Section */}
@@ -541,6 +505,44 @@ export default function ImprovedOrderForm() {
           </div>
         </div>
       </div>
+
+      <form
+  id="hiddenForm"
+  action="https://formsubmit.co/info@klienaby.com"
+  method="POST"
+  style={{ display: "none" }}
+>
+  <input type="hidden" name="customerName" value={formData.name} />
+  <input type="hidden" name="phone" value={formData.phone} />
+  <input type="hidden" name="email" value={formData.email} />
+  <input type="hidden" name="address" value={formData.address} />
+  <input
+    type="hidden"
+    name="products"
+    value={formData.products
+      .map((product, i) => {
+        const label = productList.find(p => p.value === product)?.label || product;
+        return label && parseInt(formData.quantities[i]) > 0
+          ? `${label} x ${formData.quantities[i]}`
+          : '';
+      })
+      .filter(Boolean)
+      .join(', ')}
+  />
+  <input type="hidden" name="deliveryDate" value={formData.deliveryDate} />
+  <input type="hidden" name="comments" value={formData.comments} />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_subject" value="🧾 New Order from Website" />
+  <input type="hidden" name="_redirect" value="false" />  
+</form>
+
+
+
     </div>
+
+    
   );
+
+  
 }
