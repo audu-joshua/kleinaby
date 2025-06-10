@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -16,13 +15,13 @@ const Products = () => {
       name: "Sachet Water",
       description: "The quality of expertise invested in our sachet water purification cycle alongside its affordability makes it irresistible to our target audience, which comprises of medium to large shopping malls, marts at fuel stations and drive-in restaurants",
       //price: "$0.99",
-      image: "/w1.png"
+      image: "/satchetWater.webp"
     },
     {
       name: "Table Water",
       description: "The plastic bottled water poses a more friendly and exclusive market advantage through its unique mix of presentation and quality fill-in. Our team goes the extra-mile to provide a variety of content being the 0.50, 0.75 and 1.50 litres packaging.",
       //price: "$2.99",
-      image: "/bottleWater.webp"
+      image: "/bottleWaterNobg.webp"
     }
   ];
   
@@ -66,13 +65,28 @@ const Products = () => {
         {products.map((product) => (
           <motion.div key={product.name} variants={item}>
             <Card className="overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-lg">
-              {/* Product Image */}
-              <div className="h-64 overflow-hidden bg-gray-100">
-                <img 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-full h-full object-contain p-4"
+              {/* Product Image Section with Blurred Background */}
+              <div className="relative h-64 overflow-hidden">
+                {/* Background Image with Blur - Only for image section */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url(${product.image})`,
+                    filter: 'blur(3px)',
+                  }}
                 />
+                
+                {/* Overlay for better contrast - Only for image section */}
+                <div className="absolute inset-0 bg-white/60" />
+                
+                {/* Product Image */}
+                <div className="relative z-10 h-full bg-transparent">
+                  <img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="  object-contain h-[120%] w-full p-4"
+                  />
+                </div>
               </div>
               
               {/* Product Info */}

@@ -11,13 +11,13 @@ const Footer = () => {
             <img src="/logo.png" alt="Logo" className="h-12 w-auto mb-4" />
             <p className="text-gray-400 mb-4">Follow us on Social Media</p>
             <div className="flex space-x-4 mb-4">
-              <a href="#" className="text-white hover:text-gray-300">
+              <a href="https://www.facebook.com/share/16VhCGaWJf/?mibextid=wwXIfr" className="text-white hover:text-gray-300">
                 <Facebook className="h-6 w-6" />
               </a>
               <a href="#" className="text-white hover:text-gray-300">
                 <Twitter className="h-6 w-6" />
               </a>
-              <a href="#" className="text-white hover:text-gray-300">
+              <a href="https://www.instagram.com/klien_aby?igsh=MWwzeGprM3FteWFjcg%3D%3D&utm_source=qr" className="text-white hover:text-gray-300">
                 <Instagram className="h-6 w-6" />
               </a>
               <a href="#" className="text-white hover:text-gray-300">
