@@ -10,23 +10,37 @@ export default function ContactForm() {
     email: ''
   });
   
-  const [notification, setNotification] = useState({
-    show: false,
+  const [formStatus, setFormStatus] = useState({
+    submitted: false,
     success: false,
     message: '',
+    visible: false,
     progress: 100
   });
 
-  const [progressInterval, setProgressInterval] = useState(null);
-
-  // Handle cleanup of interval when component unmounts
+  // Handle the notification progress and visibility
   useEffect(() => {
+    let progressTimer;
+
+    if (formStatus.submitted && formStatus.visible) {
+      // Start the progress timer
+      progressTimer = setInterval(() => {
+        setFormStatus(prev => {
+          if (prev.progress > 0) {
+            return { ...prev, progress: prev.progress - 1 };
+          } else {
+            // When progress reaches 0, hide the notification
+            clearInterval(progressTimer);
+            return { ...prev, visible: false, submitted: false };
+          }
+        });
+      }, 30); // 3 seconds total (100 * 30ms)
+    }
+
     return () => {
-      if (progressInterval) {
-        clearInterval(progressInterval);
-      }
+      if (progressTimer) clearInterval(progressTimer);
     };
-  }, [progressInterval]);
+  }, [formStatus.submitted, formStatus.visible]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,67 +50,81 @@ export default function ContactForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // Always throw an error since no mail service is attached yet
-    setNotification({
-      show: true,
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("https://submit-form.com/Sk8BZmgi3", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contactName: formData.name,
+        street: formData.street,
+        city: formData.city,
+        postcode: formData.postcode,
+        phone: formData.phone,
+        email: formData.email,
+        _template: "table",
+        _subject: "📩 New Contact Form Submission - Klienaby",
+        _redirect: "false"
+      })
+    });
+
+    if (response.ok) {
+      setFormStatus({
+        submitted: true,
+        success: true,
+        message: "✅ Your message has been received; we will reply shortly.",
+        visible: true,
+        progress: 100
+      });
+
+      setFormData({
+        name: '',
+        street: '',
+        city: '',
+        postcode: '',
+        phone: '',
+        email: ''
+      });
+    } else {
+      throw new Error("Submission failed");
+    }
+  } catch (error) {
+    console.error("Form error:", error);
+    setFormStatus({
+      submitted: true,
       success: false,
-      message: 'Email service not configured. Please set up mail service.',
+      message: "❌ Something went wrong. Please try again later.",
+      visible: true,
       progress: 100
     });
-    
-    startProgressCountdown();
-  };
+  }
+};
 
-  const startProgressCountdown = () => {
-    // Clear any existing interval
-    if (progressInterval) {
-      clearInterval(progressInterval);
-    }
-    
-    // Set up a new countdown
-    const interval = setInterval(() => {
-      setNotification(prev => {
-        const newProgress = prev.progress - 2;
-        
-        if (newProgress <= 0) {
-          clearInterval(interval);
-          return { ...prev, show: false, progress: 100 };
-        }
-        
-        return { ...prev, progress: newProgress };
-      });
-    }, 100);
-    
-    setProgressInterval(interval);
-  };
+
 
   return (
     <div id="contact-form" className="w-full bg-white shadow-lg rounded-xl overflow-hidden py-16 px-4 md:px-12 lg:px-20 relative">
-      {notification.show && (
-        <div className="fixed bottom-4 right-4 p-4 rounded-lg shadow-lg max-w-xs z-50 bg-[#101828] text-white">
-          <div className="flex items-center mb-2">
-            {notification.success ? (
-              <svg className="w-6 h-6 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-            ) : (
-              <svg className="w-6 h-6 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            )}
-            <p className="text-white">
-              {notification.message}
-            </p>
-          </div>
-          {/* Animated progress bar */}
-          <div className="w-full bg-gray-700 h-1 mt-2 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-[#BEEBFF] transition-all duration-100 ease-linear"
-              style={{ width: `${notification.progress}%` }}
-            ></div>
+      {/* Fixed positioned notification */}
+      {formStatus.visible && (
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm">
+          <div className="bg-gradient-to-r from-gray-700 to-gray-900 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300">
+            <div className="relative">
+              <div 
+                className="absolute bottom-0 left-0 h-1 bg-white/30 transition-all duration-75 ease-linear" 
+                style={{ width: `${formStatus.progress}%` }}
+              ></div>
+              
+              <div className="p-4 flex items-center">
+                <svg className="w-6 h-6 text-white mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <p className="text-white font-medium text-sm">{formStatus.message}</p>
+              </div>
+            </div>
           </div>
         </div>
       )}

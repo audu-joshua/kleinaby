@@ -157,24 +157,75 @@ export default function ImprovedOrderForm() {
   };
 
   const handleSubmit = async () => {
-  if (validateForm()) {
-    setFormStatus({
-      submitted: true,
-      success: true,
-      message: "✅ Your message has been received; We will reply shortly.",
-      visible: true,
-      progress: 100
-    });
-
-    setTimeout(() => {
-      const form = document.getElementById("hiddenForm") as HTMLFormElement;
-      if (form) form.submit();
-    }, 500);
-  } else {
+  if (!validateForm()) {
     setFormStatus({
       submitted: true,
       success: false,
       message: "⚠️ Please fix the errors before submitting.",
+      visible: true,
+      progress: 100
+    });
+    return;
+  }
+
+  const formattedProducts = formData.products
+    .map((product, i) => {
+      const label = productList.find(p => p.value === product)?.label || product;
+      return label && parseInt(formData.quantities[i]) > 0
+        ? `${label} x ${formData.quantities[i]}`
+        : '';
+    })
+    .filter(Boolean)
+    .join(', ');
+
+  try {
+    const response = await fetch("https://submit-form.com/9WPk61Q5Y", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        customerName: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        address: formData.address,
+        products: formattedProducts,
+        deliveryDate: formData.deliveryDate,
+        comments: formData.comments,
+        _template: "table",
+        _subject: "🧾 New Order For Klienaby",
+        _redirect: "false"
+      })
+    });
+
+    if (response.ok) {
+      setFormStatus({
+        submitted: true,
+        success: true,
+        message: "✅ Your order has been placed successfully!",
+        visible: true,
+        progress: 100
+      });
+
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        address: '',
+        products: ['', '', '', '', ''],
+        quantities: ['0', '0', '0', '0', '0'],
+        deliveryDate: '',
+        comments: ''
+      });
+    } else {
+      throw new Error("Submission failed");
+    }
+  } catch (error) {
+    console.error("Form error:", error);
+    setFormStatus({
+      submitted: true,
+      success: false,
+      message: "❌ Something went wrong. Please try again later.",
       visible: true,
       progress: 100
     });
@@ -506,36 +557,7 @@ export default function ImprovedOrderForm() {
         </div>
       </div>
 
-      <form
-  id="hiddenForm"
-  action="https://formsubmit.co/info@klienaby.com"
-  method="POST"
-  style={{ display: "none" }}
->
-  <input type="hidden" name="customerName" value={formData.name} />
-  <input type="hidden" name="phone" value={formData.phone} />
-  <input type="hidden" name="email" value={formData.email} />
-  <input type="hidden" name="address" value={formData.address} />
-  <input
-    type="hidden"
-    name="products"
-    value={formData.products
-      .map((product, i) => {
-        const label = productList.find(p => p.value === product)?.label || product;
-        return label && parseInt(formData.quantities[i]) > 0
-          ? `${label} x ${formData.quantities[i]}`
-          : '';
-      })
-      .filter(Boolean)
-      .join(', ')}
-  />
-  <input type="hidden" name="deliveryDate" value={formData.deliveryDate} />
-  <input type="hidden" name="comments" value={formData.comments} />
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_template" value="table" />
-  <input type="hidden" name="_subject" value="🧾 New Order from Website" />
-  <input type="hidden" name="_redirect" value="false" />  
-</form>
+
 
 
 
