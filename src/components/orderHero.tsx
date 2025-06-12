@@ -11,8 +11,8 @@ export function PlaceOrderHero() {
   }, []);
   
   const scrollToForm = () => {
-    const formElement = document.getElementById('order-form'); // Replace 'contact-form' with your actual form component ID
-    if (formElement) {
+    const formElement = document.getElementById('order-form'); 
+        if (formElement) {
       formElement.scrollIntoView({ 
         behavior: 'smooth',
         block: 'start' // You can also use 'center' or 'end'

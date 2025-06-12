@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    street: '',
-    city: '',
-    postcode: '',
-    phone: '',
-    email: ''
-  });
+ const [formData, setFormData] = useState({
+  name: '',
+  street: '',
+  city: '',
+  postcode: '',
+  phone: '',
+  email: '',
+  partnership: false
+});
+
   
   const [formStatus, setFormStatus] = useState({
     submitted: false,
@@ -60,16 +62,20 @@ export default function ContactForm() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        contactName: formData.name,
-        street: formData.street,
-        city: formData.city,
-        postcode: formData.postcode,
-        phone: formData.phone,
-        email: formData.email,
-        _template: "table",
-        _subject: "📩 New Contact Form Submission - Klienaby",
-        _redirect: "false"
-      })
+  contactName: formData.name,
+  street: formData.street,
+  city: formData.city,
+  postcode: formData.postcode,
+  phone: formData.phone,
+  email: formData.email,
+  partnership: formData.partnership ? "Yes" : "No", // <-- include this
+  _template: "table",
+  _subject: formData.partnership 
+    ? "🤝 New Partnership Interest - Klienaby" 
+    : "📩 New Contact Form Submission - Klienaby",
+  _redirect: "false"
+})
+
     });
 
     if (response.ok) {
@@ -81,14 +87,16 @@ export default function ContactForm() {
         progress: 100
       });
 
-      setFormData({
-        name: '',
-        street: '',
-        city: '',
-        postcode: '',
-        phone: '',
-        email: ''
-      });
+    setFormData({
+  name: '',
+  street: '',
+  city: '',
+  postcode: '',
+  phone: '',
+  email: '',
+  partnership: false
+});
+
     } else {
       throw new Error("Submission failed");
     }
@@ -225,6 +233,21 @@ export default function ContactForm() {
                 </div>
               </div>
             </div>
+
+            <div className="flex items-center gap-2 mt-4">
+  <input
+    type="checkbox"
+    id="partnership"
+    name="partnership"
+    checked={formData.partnership}
+    onChange={handleChange}
+    className="w-4 h-4"
+  />
+  <label htmlFor="partnership" className="text-sm text-[#000000]">
+    I am interested in becoming a distribution or retail partner
+  </label>
+</div>
+
             
             {/* Submit Button */}
             <div className="mt-8 w-full">
